@@ -1,0 +1,77 @@
+{extend name="base"/}
+{block name="style"}
+<style>
+#page-expertgroup-edit .layui-form-item .layui-form-label{padding-left: 2px;padding-right: 0;width: 120px;}
+#page-expertgroup-edit .layui-form-item .checkboxs-box{width: 840px;}
+</style>
+{/block}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit" id="page-expertgroup-edit">
+  <form class="layui-form layui-form-pane" lay-filter="form">
+    <input type="hidden" name="id">
+    <div class="layui-form-item">
+      <label class="layui-form-label">分组名</label>
+      <div class="layui-input-block"><input type="text" name="name" class="layui-input" lay-verify="required"></div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">对应作品类型</label>
+      <div class="layui-input-block checkboxs-box">
+        <input type="checkbox" name="works_category[]" value="A" title="机械装备">
+        <input type="checkbox" name="works_category[]" value="L" title="纺织服饰">
+        <input type="checkbox" name="works_category[]" value="D" title="智能机器人">
+        <input type="checkbox" name="works_category[]" value="P" title="体育健康旅游文创">
+        <input type="checkbox" name="works_category[]" value="B" title="交通工具">
+        <input type="checkbox" name="works_category[]" value="G" title="家用电器">
+        <input type="checkbox" name="works_category[]" value="H" title="家居与家具">
+        <input type="checkbox" name="works_category[]" value="T" title="信息化大数据平台">
+        <input type="checkbox" name="works_category[]" value="I" title="办公用品">
+        <input type="checkbox" name="works_category[]" value="C" title="五金制品">
+        <input type="checkbox" name="works_category[]" value="O" title="城市公共设施">
+        <input type="checkbox" name="works_category[]" value="F" title="电子信息及通讯产品">
+        <input type="checkbox" name="works_category[]" value="E" title="智能终端">
+        <input type="checkbox" name="works_category[]" value="S" title="乡村振兴">
+        <input type="checkbox" name="works_category[]" value="M" title="新材料及新工艺">
+        <input type="checkbox" name="works_category[]" value="K" title="医疗健康和应急防护产品">
+        <input type="checkbox" name="works_category[]" value="R" title="食品">
+        <input type="checkbox" name="works_category[]" value="N" title="包装">
+        <input type="checkbox" name="works_category[]" value="Q" title="农业及海洋产业">
+        <input type="checkbox" name="works_category[]" value="J" title="特殊人群和特种领域用品">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">提交保存</button>
+        <button type="button" class="layui-btn layui-btn-normal" onclick="closeTab()">关闭</button>
+      </div>
+    </div>
+  </form>
+</div>
+{/block}
+{block name="script"}
+<script>
+var info =JSON.parse('{$info|raw}');
+if(info && info.works_category) {
+  $.each(info.works_category,function (idx,ele) {
+    $('input[name="works_category[]"][value='+ ele +']').attr('checked',true);
+  })
+}
+form.val('form', info);
+form.render();
+
+form.on('submit(submit)', function (data) {
+  loading =layer.load(1, {shade: [0.1,'#fff']});
+  $.post('{:url("save")}', data.field, function (res) {
+      layer.close(loading);
+      if (res.code > 0) {
+          layer.msg('保存成功', {time: 1800, icon: 1}, closeTab);
+      } else {
+          layer.msg('保存失败，请检查输入是否正确或稍后再试', {time: 1800, icon: 2});
+      }
+  });
+});
+
+function closeTab() {
+  parent.tab.deleteTab(parent.tab.getCurrentTabId());
+}
+</script>
+{/block}

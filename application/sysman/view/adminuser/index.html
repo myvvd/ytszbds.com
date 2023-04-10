@@ -1,0 +1,84 @@
+{extend name="base"/}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit">
+  <div class="layui-col-md12">
+    <a data-href="/sysman/adminuser/add" data-title="新增管理员" data-icon="layui-icon layui-icon-user" class="addtab layui-btn layui-btn-normal" id="btnAdd">新增</a>
+    <button type="button" class="layui-btn layui-btn-warm" onclick="location.reload()">刷新</button>
+  </div>
+  <table class="layui-table" id="tblList" lay-filter="tblList"></table>
+</div>
+<script type="text/html" id="action">
+  <a data-href="{:url('edit')}?id={{d.id}}" data-title="编辑管理员" data-icon="layui-icon layui-icon-user" class="addtab layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+{/block}
+{block name="script"}
+<script>
+var tableIn = table.render({
+  id: 'tblList',
+  elem: '#tblList',
+  url: '/sysman/adminuser/index',
+  method: 'get',
+  page: false,
+  cols: [
+    [
+      { checkbox: true},
+      { field: 'username', title: '昵称',width:120},
+      { field: 'rolecode', title: '角色',width:120},
+      { title: '专家所属组',width:120,templet:function (d) {
+        return d.expert_group_name?d.expert_group_name:'暂未分组';
+      }},
+      { field: 'create_time', title: '注册时间',width:150},
+      { field: 'last_login_time', title: '最后登录时间',width:150},
+      { field: 'last_login_ip', title: '最后登录IP',width:120 },
+      { title:'操作', align:'center', toolbar: '#action',width:120}
+    ]
+  ],
+});
+
+table.on("tool(tblList)", function(obj) {
+  var data = obj.data;
+  if (obj.event === 'del') {
+    layer.confirm("您确定要删除该帐号吗？", function(index) {
+      var loading = layer.load(1, { shade: [0.1, "#fff"] });
+      $.post("{:url('del')}", { id: data.id }, function(res) {
+        layer.close(loading);
+        if (res.code === 1) {
+          layer.msg('删除成功', { time: 1000, icon: 1 });
+          tableIn.reload();
+        } else {
+          layer.msg('删除失败！', { time: 1000, icon: 2 });
+        }
+      });
+      layer.close(index);
+    });
+  } else if (obj.event==='edit'){
+    var el = $(this);
+    var newTab = el.data();
+    parent.tab.tabAdd(newTab);
+  }
+});
+
+
+$("body").on("click", "#delAll", function() {
+  layer.confirm("确认要删除选中信息吗？", { icon: 3 }, function(index) {
+    layer.close(index);
+    var checkStatus = table.checkStatus("user"); //test即为参数id设定的值
+    var ids = [];
+    $(checkStatus.data).each(function(i, o) {
+      ids.push(o.id);
+    });
+    var loading = layer.load(1, { shade: [0.1, "#fff"] });
+    $.post("{:url('delall')}", { ids: ids }, function(data) {
+      layer.close(loading);
+      if (data.code === 1) {
+        layer.msg(data.msg, { time: 1000, icon: 1 });
+        tableIn.reload();
+      } else {
+        layer.msg(data.msg, { time: 1000, icon: 2 });
+      }
+    });
+  });
+});
+</script>
+{/block}

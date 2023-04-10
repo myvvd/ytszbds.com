@@ -1,0 +1,182 @@
+<!doctype html>
+
+<html clsss="site-demo-overflow">
+
+<head>
+
+<meta charset="utf-8">
+
+<!-- <title>{$Think.config.sys_name}</title> -->
+<title>烟台市第四届“市长杯”工业设计大赛后台管理</title>
+
+<meta name="renderer" content="webkit">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="format-detection" content="telephone=no">
+
+<link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all" />
+
+<link rel="stylesheet" href="/static/plugins/fontawesome4.7.0/css/font-awesome.min.css" media="all" />
+
+<link rel="stylesheet" href="/static/css/backend/global.css" media="all">
+
+<link rel="stylesheet" href="/static/css/backend/font.css" media="all">
+
+<link rel="stylesheet" href="/static/plugins/layui/css/style.css" media="all" />
+
+	
+
+</head>
+
+<body>
+
+    <div class="wrap">
+
+		
+
+     <div class="loginForm">
+
+            <form class="layui-form" lay-filter="form">
+
+                <div class="logoHead">
+
+                   <h2 style="margin-top: 15px">专家登录</h2>
+
+                </div>
+
+                <div class="usernameWrapDiv">
+
+                    <div class="usernameLabel">
+
+                        <label>用户名:</label>
+
+                    </div>
+
+                    <div class="usernameDiv">
+
+                        <i class="layui-icon layui-icon-username adminIcon"></i>
+
+                        <input id="loginUsername" class="layui-input adminInput" type="text" name="username" placeholder="输入用户名" >
+
+                    </div>
+
+                </div>
+
+                <div class="usernameWrapDiv">
+
+                    <div class="usernameLabel">
+
+                        <label>密码:</label>
+
+                    </div>
+
+                    <div class="passwordDiv">
+
+                        <i class="layui-icon layui-icon-password adminIcon"></i>
+
+                        <input id="loginPassword" class="layui-input adminInput" type="password" name="password" placeholder="输入密码">
+
+                    </div>
+
+                </div>
+
+           
+
+                <div class="usernameWrapDiv">
+
+                 <div class="layui-col-sm12 layui-col-md12">
+
+					  <div class="submitDiv">
+
+						<button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="smtLogin" id="loginBtn">立即登录</button>
+
+					 </div>  
+
+					</div>
+
+              </div>
+
+               
+
+			
+
+            </form>
+
+		</div>
+
+		
+
+       
+
+        
+
+        </div>
+
+	
+
+	
+
+   
+
+
+
+<script src="/static/js/jquery-1.11.0.min.js"></script>
+
+<script src="/static/plugins/layui/layui.all.js"></script>
+
+<script src="/static/js/backend/index.js"></script>
+
+<script src="/static/js/tab.js"></script>
+
+<script>
+
+        layui.use(['layer','form'],function () {
+
+            var layer = layui.layer,form = layui.form;
+
+			
+
+			form.on('submit(smtLogin)', function(data){							   
+
+			  $.post('/expertlogin',data.field,function (res) {
+
+				if (res.code!=1) {
+
+				  $("#loginUsername").val('');
+
+				  $("#loginPassword").val('');
+
+				  return layer.alert(res.msg?res.msg:'登录失败，请检查输入的帐号密码是否正确');
+
+				}
+
+				layer.msg('登录成功');
+
+				setTimeout(function() {top.location.href = res.url}, 1000);
+
+			  })
+
+			  return false;
+
+			});
+
+        })
+
+    
+
+        
+
+	
+
+    </script>
+
+</body>
+
+</html>

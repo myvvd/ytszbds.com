@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="zh-cn"><head>
+  <title>{$webset.name}</title>
+{include file="head" /}
+{block name="style"}{/block}
+</head><body>
+<!-- 	<style>
+		.nav a:hover,.nav a:active{color:#fff;} 
+	</style> -->
+<div class="header">
+  <div class="header-box">
+  	{volist name="listcate" id="v"}
+	{if $v['ftitle'] == 'wlogo' && $v['cateid'] == 11}
+    <div class="logo-box"><img src="/static/images/logo.svg" alt="{$Think.config.sys_name}"></div>
+    {/if}
+    {/volist}
+    {include file="head-nav" /}
+  </div> 
+</div>
+<div class="main">
+{block name="body"}{/block}
+</div>
+{include file="footer" /}
+{block name="script"}{/block}
+</body>
+</html>
+

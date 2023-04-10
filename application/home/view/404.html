@@ -1,0 +1,18 @@
+{extend name="simplebase"}
+{block name="style"}
+<title>404-{:config('sys_name')}</title>
+{/block}
+{block name="body"}
+<!-- 404 中间详情 -->
+<div class="wrong">
+	<img src="/static/images/home/common/404.png" alt="" class="img-404">
+	<p>啊呀…… 这个页面竟然不见了</p>
+	<p>可能原因：网络信号差；网址输入错误；该页面已经移动或者删除</p>
+	<p> <span id="jumpTo">5</span><span>秒之后</span><a href="/">返回上一级</a></p>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+	countDown(5, '/');
+</script>
+{/block}

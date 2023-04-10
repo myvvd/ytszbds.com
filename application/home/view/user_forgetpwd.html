@@ -1,0 +1,48 @@
+{extend name="bgbase"}
+{block name="body"}
+<div class="usertool-box reg-box forget_bg">
+ <!--  <div class="img-box"><img src="/static/images/web/forgetpwd-bg.jpg" alt=""></div> -->
+  <div class="form-box">
+     <h3>找回密码</h3>
+    <form class="layui-form" onsubmit="return false">
+      <input type="hidden" name="action" value="forgetpwd">
+      <div class="form-group">
+        <i class="layui-icon layui-icon-cellphone"></i>
+        <div class="splitter"></div>
+        <input type="text" maxlength="11" placeholder="填写手机号" name="mobile" class="form-control" lay-verify="required|phone">
+      </div>
+      <div class="form-group">
+        <i class="layui-icon layui-icon-vercode"></i>
+        <div class="splitter"></div>
+        <input type="text" placeholder="输入短信验证码" name="smscode" class="form-control" maxlength="4" lay-verify="required|number">
+        <button class="smscode-button">发送短信验证码</button>
+      </div>
+      <div class="form-group">
+        <i class="layui-icon layui-icon-key"></i>
+        <div class="splitter"></div>
+        <input type="password" placeholder="设置新密码" name="password" class="form-control" maxlength="20" lay-verify="required">
+      </div>
+      <div class="form-group">
+        <i class="layui-icon layui-icon-password"></i>
+        <div class="splitter"></div>
+        <input type="password" placeholder="确认新密码" name="confirmpwd" class="form-control" maxlength="20" lay-verify="required">
+      </div>
+      <div class="form-submit"><button class="layui-btn" lay-submit lay-filter="smtReg">确认</button></div>
+    </form>
+  </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+form.on('submit(smtReg)',function (data) {
+  $.post('/forgetpwd',data.field,function (res) {
+    if (res.code!=1) {
+      return layer.alert(res.msg?res.msg:'出错啦！');
+    }
+    layer.msg('恭喜，您已重设密码，请使用新密码重新登录');
+    setTimeout(function() {top.location.href = '/login'}, 2000);
+  })
+  return false;
+});
+</script>
+{/block}

@@ -1,0 +1,175 @@
+{extend name="bgbase"}
+{block name="style"}
+<style>
+.main-box{width: 100%;display: flex;flex-direction: column;min-height: 566px;
+background: #F9F9F9;padding: 50px;padding-top: 40px;}
+.btn-box{margin-top: 40px;}
+.btn-box a:hover{color:#fff;}
+.btn{width: 110px;height: 40px;line-height:40px;cursor: pointer;border-radius: 4px;background: #ed0000;font-size: 15px;color: #fff;text-align: center;float: right;}
+.list-box{display:flex;padding: 0 70px;padding-bottom: 100px;
+background: #FFFFFF;margin-top: 40px;}
+.tblList tr{height: 86px;border-bottom: 1px solid #eee;width: 100%;}
+.tblList tr .title{width:520px;padding: 0 20px 0 0;  overflow: hidden;text-overflow: ellipsis;white-space: nowrap;display: block;line-height: 86px;font-weight: bold;font-size: 18px;color: #333333;}
+.tblList tr .title a{color: inherit;font-size: inherit;}
+.tblList tr .subtitle{text-align: center;padding-right: 10px;padding-left: 10px;font-size: 15px;position: relative;}
+.tblList tr .subtitle:before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: 21px;
+  background: #CCCCCC;
+     -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.tblList tr .subtitle:last-child:before {
+  display: none;
+}
+.color{color:#ed0000;cursor: pointer;}
+.color:hover{color:#ed0000;font-weight:bold}
+.color2{color:#2690C2;cursor: pointer;}
+.emptytip {font-size: 20px;color: #060500;text-align: center;}.tips1{margin-top: 100px}.tips2{margin-top: 20px}
+.passed {color: #E60010;}
+.m_title {font-size: 24px;
+font-weight: bold;
+line-height: 40px;
+text-align: center;
+width: 100%;
+color: #333333;}
+
+.clear {
+  clear: both;
+  height: 0px;
+  font-size: 1px;
+  line-height: 0px;
+}
+.tip_img {
+  text-align: center;
+  padding-bottom: 50px;
+}
+.m_tip p {text-align: center;font-size: 20px;
+line-height: 40px;
+color: #000000;}
+.m_tip_a {text-align: center;padding-top: 60px;}
+.m_tip_a a {width: 200px;display:inline-block;
+height: 50px;
+background: #E80014;color: #fff;
+font-size: 18px;
+line-height: 50px;
+border-radius: 29px;}
+</style>
+{/block}
+{block name="body"}
+<div class="main-box">
+  <!-- <div class="btn-box"><a href="/enroll" class="btn fr">添加新作品</a></div> -->
+
+  {empty name="list"}
+    <div class="m_tip">
+    <div class="tip_img"><img src="/static/images/web/tip.png" alt=""></div>
+    <p>您还没有产品（作品）提交，快来申报吧<br>
+（建议使用非IE核心浏览器如谷歌浏览器、QQ浏览器、搜狗浏览器、360浏览器等访问）</p>
+<div class="m_tip_a"><a href="/enroll">开始申报</a></div>
+
+</div>
+    <!-- <span class="emptytip tips1">您还未申报作品，快点击右上角按钮去发布属于你的作品吧!</span>
+    <span class="emptytip tips2">（建议使用非IE核心浏览器如谷歌浏览器、QQ浏览器、搜狗浏览器、360浏览器等访问）</span> -->
+  {else /}
+   <h3 class="m_title">我的作品</h3>
+    <div class="clear"></div>
+  <div class="list-box">
+   
+    <table class="tblList">
+      {volist name="list" id="vo"}
+      <tr>
+        <td class="title">
+         
+		  {if $vo['checkstatus1']==-1||$vo['checkstatus1']==1}
+			<a>{$vo.title}</a>
+		  
+		  {else}
+		    <a href="/enroll?id={$vo.id}">{$vo.title}</a>
+		  {/if}
+          <!--{php}
+          if($vo['submitto']==1){
+            switch ($vo['checkstatus1']) {
+              case -1:
+                echo '<span style="color: #C7464D;">【资格审查被驳回】</span>';
+                break;
+              case 1:
+                echo '<span style="color: #67C164;">【资格审查已通过】</span>';
+                break;
+              default:
+                echo '<span style="color: #4FACDC;">【已提交】</span>';
+                break;
+            }
+          } else {
+            echo '<span style="color:#fea250;">【待提交】</span>';
+          }
+          {/php}-->
+        </td>
+		  <td class="subtitle">
+		 {php}
+          if($vo['submitto']==1){
+            switch ($vo['checkstatus1']) {
+              case -1:
+                echo '<span style="color: #ed0000;">资格审查被驳回</span>';
+                break;
+              case 1:
+                echo '<span style="color: #ed0000;">资格审查已通过</span>';
+                break;
+              default:
+                echo '<span style="color: #ed0000;">已提交</span>';
+                break;
+            }
+          } else {
+            echo '<span style="color:#ed0000;">待提交</span>';
+          }
+          {/php}
+		</td>
+        <td class="subtitle">{if ( $vo['zj_audit1'] == 1) OR ( $vo['gx_audit'] == 1) }<p class="passed">初评通过</p>{else /}待初评{/if}</td>
+        {if $isopen == 1}<td class="subtitle">{switch $vo.zj_audit2 }{case 0}待复评{/case}{case 1}<p class="passed">复评通过</p>{/case}{default /}复评未通过{/switch}</td>{/if}
+        <td class="subtitle">{switch $vo.zj_audit3 }{case 0}待终评{/case}{case 1}<p class="passed">终评通过</p>{/case}{default /}终评未通过{/switch}</td>
+        <td class="subtitle"><a class="color" href="/enroll?id={$vo.id}">查看作品</a></td>
+         {if $ispdf == 1}<td class="subtitle">{empty name="$vo.pdf_upload_url"}<span>下载申报书</span>{else /}<a href="{$vo.pdf_upload_url}" {if $vo.checkstatus1==1}class="color"{/if} title="下载申报书" target="_blank" >下载申报书</a>{/empty}</td>{/if}
+         <td class="subtitle">
+		
+		{if $vo.checkstatus1==1}
+			<a href="javascript:void(0);" class="createCertificate color" data-id="{$vo.id}">下载参赛证明</a>
+		{else}
+			<a href="javascript:void(0);" onclick="noCertificate();" title="下载参赛证明">下载参赛证明</a>
+		{/if}
+		</td>
+      </tr>
+      {/volist}
+    </table>
+	
+  </div>
+  <div class="m_tip">
+   
+	<div class="m_tip_a"><a href="/enroll">新增申报</a></div>
+	</div>
+  {/empty}
+</div>
+{/block}
+{block name="script"}
+<script>
+$('.createCertificate').click(function () {
+  $.post('/home/enroll/createCertificate',{id:$(this).data('id')},function(res) {
+    if(res.code == 1){
+      window.open(res.data);
+    }else{
+      layer.msg('下载失败',{icon: 2,shade: [0.3,'#000']});
+    }
+  });
+})
+
+function noCertificate(){
+	layer.msg('资格审查通过后即可下载参赛证明',{icon: 2,shade: [0.3,'#000']});
+}
+function nopdf_upload_url(){
+layer.msg('资格审查通过后下载打印申报书',{icon: 2,time:5000,shade: [0.3,'#000']});
+}
+</script>
+{/block}

@@ -1,0 +1,18 @@
+{extend name="simplebase"}
+{block name="style"}
+<title>500-{:config('sys_name')}</title>
+{/block}
+{block name="body"}
+<!-- 500 中间详情 -->
+<div class="wrong">
+  <img src="/static/images/home/common/500.png" alt="" class="500img">
+  <p>非常抱歉！这个页面崩溃了</p>
+  <p>服务器遇到错误，我们正在积极抢修</p>
+  <p> <span id="jumpTo">5</span><span>秒之后</span><a href="/">返回上一级</a></p>
+</div>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+  countDown(5, '/');
+</script>
+{/block}

@@ -1,0 +1,56 @@
+{extend name="base" /}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit">
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md8">
+        <div class="layui-card">
+          <div class="layui-card-header">数据统计</div>
+          <div class="layui-card-body">
+            <div class="layui-carousel layadmin-carousel layadmin-backlog" lay-anim="" lay-indicator="inside" lay-arrow="none" style="width: 100%;height: 286px;">
+              <ul class="layui-row layui-col-space10 layui-this">
+                <li class="layui-col-md4">
+                  <a data-href="/sysman/works" class="layadmin-backlog-body" title="参赛作品管理">
+                    <h3>作品总数</h3>
+                    <p><cite>{$stat.totalWorksCount}</cite></p>
+                  </a>
+                </li>
+                <li class="layui-col-md4">
+                  <a data-href="/sysman/works/index?createtime_startdate=today" class="layadmin-backlog-body" title="今日登记作品数">
+                    <h3>今日作品数</h3>
+                    <p><cite>{$stat.todayWorksCount}</cite></p>
+                  </a>
+                </li>
+                <li class="layui-col-md4">
+                  <a data-href="/sysman/works/index?state=waitzhongshen" class="layadmin-backlog-body" title="待初审作品数">
+                    <h3>待初审作品数</h3>
+                    <p><cite>{$stat.waitChushenCount}</cite></p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md4">
+        <div class="table-responsive">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+layui.use(['jquery'],function () {
+  var $ = layui.jquery;
+  $('a.layadmin-backlog-body').click(function () {
+    var el = $(this)
+    var newTab = el.data()
+    $.extend(newTab,{icon:el.children('i').attr('class'),title:el.attr('title')})
+    parent.tab.tabAdd(newTab);
+  })
+})
+</script>
+{/block}

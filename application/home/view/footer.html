@@ -1,0 +1,152 @@
+{volist name="listcate" id="vo"}
+
+  {if $vo['ftitle'] == 'dbxx' && $vo['cateid'] == '10'}
+    <!-- {$vo.content|raw}
+     -->
+     <div class="footer">
+  <div class="mfoot_l">
+    <div class="mfoot_logo"><img src="/static/images/footlogo.svg" alt="" width="179"></div>
+    <div class="mfoot_img"><img  src="{$webset.erweima_one}" width="80" height="80"><!--<img  src="{$webset.erweima_two}" width="80" height="80">--></div>
+	<br/>
+	 <p class="beian" style="text-align:center;"><a style="color:#FFFFFF" href="https://beian.miit.gov.cn/" target="_blank">{$webset.beian}</a></p>
+  </div>
+  <div class="mfoot_m">
+      <div class="mfoot_m_cont m_one">
+        <div class="left">
+          <strong>主办单位：</strong>
+          <span>{$webset.host}</span>
+        </div>
+        <div class="right">
+          <strong>支持单位：</strong>
+          <span>{$webset.support}</span>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="mfoot_m_cont m_two">
+        <div class="left">
+          <strong>承办单位：</strong>
+          <div class="mfoot_list">
+		  {foreach name="webset.undertake" item="vo"}
+		  {if $key%2==0}
+          <span style="display:block;">{$vo}</span>
+		  {/if}
+		  {/foreach}
+          
+          </div>
+        </div>
+        <div class="right">
+		 {foreach name="webset.undertake" item="vo"}
+		  {if $key%2==1}
+          <span style="display:block;">{$vo}</span>
+		  {/if}
+		  {/foreach}
+          
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div class="mfoot_m_cont">
+        <div class="left">
+          <strong>协办单位：</strong>
+		   {foreach name="webset.xieban" item="vo"}
+		  {if $key==0}
+          <span>各市工业和信息化局</span>
+		  {/if}
+		    {/foreach}
+        </div>
+        <div class="right">
+		 {foreach name="webset.xieban" item="vo"}
+		  {if $key>0}
+          <span>山东省工业设计协会</span>
+		  {/if}
+		  {/foreach}
+        </div>
+        <div class="clear"></div>
+      </div>
+  </div>
+  <div class="mfoot_r">
+    <strong>{$webset.zuwei}</strong>
+    <div class="height170">
+    <p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</span>{$webset.contacts}</p>
+	<p><span>&nbsp;</span>王  晨     韩  啸</p>
+	{foreach name="webset.tel" item="vo"}
+	 {if $key==0}
+    <p><span>电 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span>{$vo}</p>  
+	{else}
+	<p><span>&nbsp;</span>{$vo}</p>
+	{/if}
+	{/foreach}
+    
+   <!-- <p><span>微&nbsp;&nbsp;信&nbsp;&nbsp;号：</span>{$webset.weixin}</p>-->
+    <p><span>邮 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>{$webset.email}</p>
+	 <p><span>邮寄地址：</span>烟台市高新区科技大道69号创业大厦</p>
+    </div>
+   
+  </div>
+
+  {/if}
+
+{/volist}
+<script src="/static/plugins/layui/layui.all.js"></script>
+<script>
+var $=layui.$,form=layui.form,upload=layui.upload,layer=layui.layer,laydate=layui.laydate,upload = layui.upload;;
+//顶部导航栏不同模块增加style
+var headerNavLinks = $('.nav li a');
+var headerUserCenterLinksImg = $('.usercenter li');
+var headerUserCenterLinks = $('.usercenter li a');
+var cookie = {:json_encode($Think.cookie.uid)};
+switch (window.location.pathname) {
+  case '/index':
+    headerNavLinks.eq(0).css('color','#e50013')
+    break;
+  case '/news':
+    headerNavLinks.eq(1).css('color','#e50013')
+    break;
+  case '/view':
+    headerNavLinks.eq(1).css('color','#e50013')
+    break;
+  case '/enroll':
+    headerNavLinks.eq(2).css('color','#e50013');
+    //headerUserCenterLinks.eq(0).css('color','#fff')
+    //headerUserCenterLinks.eq(1).css('color','#fff')
+    //if(cookie){headerUserCenterLinksImg.eq(1).find('img').attr('src','/static/images/web/my-white.png')}
+   // headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/enroll_agreement':
+    headerNavLinks.eq(2).css('color','#e50013');
+    //headerUserCenterLinks.eq(0).css('color','#fff')
+    //headerUserCenterLinks.eq(1).css('color','#fff')
+//if(cookie){headerUserCenterLinksImg.eq(1).find('img').attr('src','/static/images/web/my-white.png')}
+   // headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/login':
+    headerUserCenterLinks.eq(0).addClass('active');
+  //  headerUserCenterLinks.eq(1).css('color','#fff')
+  //  headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/reg':
+   // headerUserCenterLinks.eq(0).css('color','#fff')
+    headerUserCenterLinks.eq(1).addClass('active');
+    //headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/forgetpwd':
+    //headerUserCenterLinks.eq(0).css('color','#fff')
+    headerUserCenterLinks.eq(1).addClass('active');
+//headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/ucenter':
+    headerUserCenterLinks.eq(0).addClass('active');
+    //if(cookie){headerUserCenterLinksImg.eq(1).find('img').attr('src','/static/images/web/my-white.png')}
+  //  headerUserCenterLinks.eq(1).css('color','#fff');
+  //  headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  default:
+    headerNavLinks.eq(0).css('color','#e50013')
+    break;
+}
+
+// function temporary() {
+//   layer.alert('尚未开放,请耐心等待:)',{title:'提示'})
+// }
+</script>
+<script src="/static/js/web/common.js"></script>
+

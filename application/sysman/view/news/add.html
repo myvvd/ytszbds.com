@@ -1,0 +1,92 @@
+{extend name="base"/}
+{block name="style"}
+<style>
+.img-box {height: 100px;width: 100px; margin: 0 8px;display: inline-block;position: relative;cursor: pointer;}
+.img-box img{width: 100%;height: 100%;}
+.img-box i{height: 12px;line-height: 12px;font-size: 12px;position: absolute;right: 4px;top:4px;}
+.layui-input-block.title-input,.layui-input-block.content-input{width: 100%;}
+
+.w-e-text-container{min-height:500px !important;}
+</style>
+{/block}
+{block name="body"}
+<script charset="utf-8" src="/static/plugins/nkeditor/libs/jquery.min.js"></script>
+<fieldset class="layui-elem-field layui-field-title">
+  <legend>赛事动态新增/编辑</legend>
+</fieldset>
+<form class="layui-form layui-form-pane">
+  <input type="hidden" name="id" value="{$record.id}">
+  <div class="layui-form-item">
+    <label class="layui-form-label"><span class="required">*</span>标题:</label>
+    <div class="layui-input-block title-input">
+      <input type="text" name="title" lay-verify="required" value="{$record.title}" placeholder="请输入标题" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label content-label"><span class="required">*</span>内容:</label>
+    <div class="layui-input-block content-input">
+      <div id="content"> <textarea name="content" id="text-content" style="width:98%;height:1000px">{$record['content']|raw}</textarea></div>
+    </div>
+      <script type="text/javascript" src="/static/plugins/ckeditor/ckeditor.js"></script>
+   <script type="text/javascript">
+      var editor = CKEDITOR.replace('text-content');
+
+    </script>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block smt-btns-box">
+      <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
+      <a href="{:url('index')}" class="layui-btn layui-btn-primary">返回</a>
+    </div>
+  </div>
+</form>
+
+{/block}
+{block name="script"}
+<!-- <script charset="utf-8" src="/static/plugins/nkeditor/NKeditor-all-min.js"></script> -->
+
+<script charset="utf-8" src="/static/plugins/nkeditor/libs/JDialog/JDialog.min.js"></script>
+<script src="/static/plugins/nkeditor/libs/bootstrap/bootstrap.min.js"></script>
+<script>
+// var editor;
+// KindEditor.ready(function(K) {
+//   editor = K.create('textarea[name="content"]', {
+//     uploadJson : '/sysman/upfiles/editimg',
+//     dialogOffset : 0, //对话框距离页面顶部的位置，默认为0居中，
+//     allowImageUpload : true,
+//     items : ['source','formatblock', 'fontname', 'fontsize','forecolor','justifyleft', 'justifycenter', 'justifyright',
+//       'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'bold', 'italic', 'underline',
+//       'lineheight', 'removeformat','plainpaste','image', 'table', 'insertfile', 'hr', 'pagebreak','link', 'unlink',
+//       'preview'
+//     ],
+//     afterChange : function() {
+//       this.sync();
+//     },
+//     themeType : "default", //主题
+//     errorMsgHandler : function(message, type) {
+//       try {
+//         JDialog.msg({type:type, content:message, timer:2000});
+//       } catch (Error) {
+//         alert(message);
+//       }
+//     }
+//   });
+// });
+
+laydate.render({ elem: '#starttime', type: 'datetime', format: 'yyyy-MM-dd HH:mm:ss' });
+laydate.render({ elem: '#endtime', type: 'datetime', format: 'yyyy-MM-dd HH:mm:ss' });
+
+form.on('submit(submit)', function (data) {
+  data.field.content = editor.document.getBody().getHtml();
+  var loading = layer.load(1, { shade: [0.1, '#fff'] });
+  $.post("{:url('save')}", data.field, function (res) {
+    layer.close(loading);
+    if (res.code > 0) {
+      layer.msg(res.msg, { time: 1800, icon: 1 }, function () { location.href = 'index'; });
+    } else {
+      layer.msg(res.msg, { time: 1800, icon: 2 });
+    }
+  });
+});
+</script>
+{/block}

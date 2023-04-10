@@ -1,0 +1,549 @@
+{extend name="base"/}
+{block name="style"}
+<style>
+.main {margin: 20px;background: #FFF;padding: 20px;min-height: 600px;}
+h4 {font-size: 18px;color: inherit;font-family: inherit;font-weight: 500;line-height: 1.2;}
+a.o-btn-blue:link, a.o-btn-blue:visited {color: #ffffff;}
+.o-fr {float: right !important;}
+.o-btn-size-small {font-size: 12px;padding: 5px 10px;}
+.o-btn-blue {background-color: #00a7e7;border-color: #00a7e7;}
+.o-mt-20 {margin-top: 20px;}
+.o-form {padding: 10px;}
+.o-form-group {margin-top: 10px;margin-bottom: 10px;overflow: hidden;}
+.o-form-horizontal .o-form-label {padding-right: 10px;text-align: right;}
+.o-grid-4 {width: 33.33333333%;}
+.o-input-right-p {height: 40px;line-height: 40px;font-size: 14px;}
+[class*="o-grid-"] {float: left;padding-left: 0;padding-right: 0;box-sizing: border-box;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;position: relative;}
+.o-ml {margin-left: 10px;}
+.o-fl {float: left !important;}
+.application_list_one_more {border-top: 1px solid #92BEE7;border-bottom: 1px solid #92BEE7;width: 100%;padding: 20px;overflow: hidden;list-style: none;margin: 0px;border: 0;font-size: 14px;font: inherit;vertical-align: baseline}
+.application_list_one_more li {float: left;width: 50%;height: 40px;line-height: 40px;border-bottom: 1px solid #F2F2F2;}
+.application_list_one_more li .application_list_title {float: left;width: 38%;text-align: right;font-weight: 600;color: #666;}
+.application_list_one_more li .application_list_title span {padding-right: 10px;}
+.application_list_one_more li .application_list_val {float: left;width: 60%;text-align: left;}
+.btn{padding-left: 30.33333333%;text-align: left;}
+.textarea{width: 350px;height: 150px;border-radius: 5px;color: #333;border: 1px solid #e6e6e6;padding:15px;}
+</style>
+{/block}
+{block name="body"}
+<div class="main">
+  <h4>查看详情 <a href="javascript:history.go(-1)" class="o-fr o-btn o-radius o-btn-blue o-btn-size-small o-back">返回</a></h4>
+  <div class="form-content o-mt-20">
+    <form action="" method="post" class="o-form o-form-horizontal ajax-post" id="o-form-ajax-post" data-url="ajax-post">
+      <div class="o-form-group">
+        <label class="o-grid-4 o-form-label o-text-default" style=" padding-top:10px; color: #666; ">作品名称</label>
+        <div class="o-grid-4 o-form-field">
+          <p class="o-fl o-ml o-input-right-p"><span style=" font-size:14px; font-weight:600; ">{$record.title}</span></p>
+          <a href="javascript:;" id="list_btn_more" style=" margin-top:10px; float:left; width:45px; height:20px; display:block"><span style=" float:left; padding-left:15px; padding-right:5px; "><img src="/static/images/more_btn_info_1.png"></span></a>
+        </div>
+        <div style=" text-align:center; padding-bottom:10px; border-bottom:1px solid #F4F8F9; margin-bottom:10px; font-size:16px; overflow:hidden; ">
+          <span style="float:left;">申报编号：</span>
+          <span style="float:left;font-weight:600; ">{$record.workcode}（{$record.city}）</span>
+        </div>
+        {if ( $Think.cookie.rolecode =='admin')}
+        {notempty name="record.check1_remark"}
+          <p style=" padding-bottom:10px; border-bottom:1px solid #F4F8F9; margin-bottom:10px; ">初审意见：
+		  
+		  {$record.check1_remark}</p>
+        {/notempty}
+		{notempty name="record.check1_remark2"}
+			{foreach name="record.check1_remark2" item='vo'}
+			   <p>{$vo}</p>
+			{/foreach}
+		{/notempty}
+        {/if}
+        <ul class="application_list_one_more" style="display:none; ">
+          <li>
+            <div class="application_list_title"><span>申报作品名称</span></div>
+            <div class="application_list_val">
+              {empty name="record.title"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.title}</span>
+              {/empty}
+            </div>
+          </li>
+		   <li>
+            <div class="application_list_title"><span>推荐单位</span></div>
+            <div class="application_list_val">
+              {empty name="record.commend_company"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.commend_company}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>参赛对象</span></div>
+            <div class="application_list_val">
+              {empty name="record.contestants"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>
+                  <span style=" padding-right:10px; ">{$record.contestants}</span>
+                  <!-- {eq name="record.contestants" value="1"}
+                    <span style=" padding-right:10px; ">企业工业设计中心</span>
+                  {/eq}
+                  {eq name="record.contestants" value="2"}
+                    <span style=" padding-right:10px; ">高等院校</span>
+                  {/eq}
+                  {eq name="record.contestants" value="3"}
+                    <span style=" padding-right:10px; ">企事业单位</span>
+                  {/eq}
+                  {eq name="record.contestants" value="4"}
+                  <span style=" padding-right:10px; ">设计机构</span>
+                  {/eq}
+                  {eq name="record.contestants" value="5"}
+                    <span style=" padding-right:10px; ">社会团体</span>
+                  {/eq}
+                  {eq name="record.contestants" value="6"}
+                    <span style=" padding-right:10px; ">个人</span>
+                  {/eq} -->
+                </span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>申报组别</span></div>
+            <div class="application_list_val">
+              {empty name="record.declaration_group"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>
+                  <span style=" padding-right:10px; ">{$record.declaration_group}</span>
+                 <!--  {eq name="record.declaration_group" value="C"}
+                    <span style=" padding-right:10px; ">产品组</span>
+                  {/eq}
+                  {eq name="record.declaration_group" value="G"}
+                    <span style=" padding-right:10px; ">概念组</span>
+                  {/eq} -->
+                </span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>作品类别</span></div>
+            <div class="application_list_val">
+              {empty name="record.works_category"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>
+                   <span style=" padding-right:12px;">{$record.works_category}</span>
+                  <!-- {eq name="record.works_category" value="A"}
+                    <span style=" padding-right:12px;">机械装备</span>
+                  {/eq}
+                  {eq name="record.works_category" value="L"}
+                    <span style=" padding-right:12px;">纺织服饰</span>
+                  {/eq}
+                  {eq name="record.works_category" value="D"}
+                    <span style=" padding-right:12px;">智能机器人</span>
+                  {/eq}
+                  {eq name="record.works_category" value="P"}
+                    <span style=" padding-right:12px;">体育健康旅游文创</span>
+                  {/eq}
+                  {eq name="record.works_category" value="B"}
+                    <span style=" padding-right:12px;">交通工具</span>
+                  {/eq}
+                  {eq name="record.works_category" value="G"}
+                    <span style=" padding-right:12px;">家用电器</span>
+                  {/eq}
+                  {eq name="record.works_category" value="H"}
+                  <span style=" padding-right:12px;">家居与家具</span>
+                  {/eq}
+                  {eq name="record.works_category" value="T"}
+                    <span style=" padding-right:12px;">信息化大数据平台</span>
+                  {/eq}
+                  {eq name="record.works_category" value="I"}
+                    <span style=" padding-right:12px;">办公用品</span>
+                  {/eq}
+                  {eq name="record.works_category" value="C"}
+                    <span style=" padding-right:12px;">五金制品</span>
+                  {/eq}
+                  {eq name="record.works_category" value="O"}
+                    <span style=" padding-right:12px;">城市公共设施</span>
+                  {/eq}
+                  {eq name="record.works_category" value="F"}
+                    <span style=" padding-right:12px;">电子信息及通讯产品</span>
+                  {/eq}
+                  {eq name="record.works_category" value="E"}
+                  <span style=" padding-right:12px;">智能终端</span>
+                  {/eq}
+                  {eq name="record.works_category" value="S"}
+                    <span style=" padding-right:12px;">乡村振兴</span>
+                  {/eq}
+                  {eq name="record.works_category" value="M"}
+                    <span style=" padding-right:12px;">新材料及新工艺</span>
+                  {/eq}
+                  {eq name="record.works_category" value="K"}
+                    <span style=" padding-right:12px;">医疗健康和应急防护产品</span>
+                  {/eq}
+                  {eq name="record.works_category" value="R"}
+                    <span style=" padding-right:12px;">食品</span>
+                  {/eq}
+                  {eq name="record.works_category" value="N"}
+                    <span style=" padding-right:12px;">包装</span>
+                  {/eq}
+                  {eq name="record.works_category" value="Q"}
+                    <span style=" padding-right:12px;">农业及海洋产业</span>
+                  {/eq}
+                  {eq name="record.works_category" value="J"}
+                    <span style=" padding-right:12px;">特殊人群和特种领域用品</span>
+                  {/eq} -->
+                </span>
+              {/empty}
+            </div>
+          </li>
+          <li style="width: 99%;">
+            <div class="application_list_title" style="width: 19%;"><span>团队成员</span></div>
+            <div class="application_list_val" style="width: 81%;">
+              {empty name="record.team_member"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.team_member}</span>
+              {/empty}
+            </div>
+          </li>
+          <li style="width: 1%;">
+          </li>
+		  
+		   <li>
+            <div class="application_list_title"><span>单位社会信用代码</span></div>
+            <div class="application_list_val">
+              {empty name="record.credit_code"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.credit_code}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>主创身份证号</span></div>
+            <div class="application_list_val">
+              {empty name="record.creator_idcard"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.creator_idcard}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>主创护照</span></div>
+            <div class="application_list_val">
+              {empty name="record.creator_hz"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.creator_hz}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>主创电话/手机</span></div>
+            <div class="application_list_val">
+              {empty name="record.creator_tel"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.creator_tel}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>主创邮箱</span></div>
+            <div class="application_list_val">
+              {empty name="record.creator_email"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.creator_email}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>主创设计者</span></div>
+            <div class="application_list_val">
+              {empty name="record.creator_designer"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.creator_designer}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>联系人</span></div>
+            <div class="application_list_val">
+              {empty name="record.contact_person"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.contact_person}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>联系人电话/手机</span></div>
+            <div class="application_list_val">
+              {empty name="record.contact_tel"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.contact_tel}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>联系人邮箱</span></div>
+            <div class="application_list_val">
+              {empty name="record.contact_email"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <span>{$record.contact_email}</span>
+              {/empty}
+            </div>
+          </li>
+          <li style=" width:100%; height:auto; ">
+            <div class="application_list_title" style=" width:19%; "><span>单位/个人简介</span></div>
+            <div class="application_list_val">
+              {empty name="record.works_profile"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                {$record.works_profile|htmlspecialchars_decode}
+              {/empty}
+            </div>
+          </li>
+
+          <li>
+            <div class="application_list_title" style=" width:38%; "><span>验证材料</span></div>
+            <div class="application_list_val">
+              {notempty name="record['validation_a']"}
+                <a href="{$record['validation_a']}" target="_blank"><img src="{$record['validation_a']|get_thumb}" height="30"/></a>
+              {/notempty}
+              {notempty name="record['validation_b']"}
+                <a href="{$record['validation_b']}" target="_blank"><img src="{$record['validation_b']|get_thumb}" height="30"/></a>
+              {/notempty}
+              {notempty name="record['validation_c']"}
+                <a href="{$record['validation_c']}" target="_blank"><img src="{$record['validation_c']|get_thumb}" height="30"/></a>
+              {/notempty}
+              {notempty name="record['relevant_data']"}
+                &nbsp; &nbsp;<a href="{:url('download')}?id={$record['id']}" target="_blank">点击查看相关材料</a>
+              {/notempty}
+            </div>
+          </li>
+          <li></li>
+          <li>
+            <div class="application_list_title"><span>完成日期</span></div>
+            <div class="application_list_val">
+              {empty name="record.completion_date"}
+              <span style=" color:#CCC; ">暂无</span>
+              {else /}
+              <span>{$record.completion_date|date='Y-m-d'}</span>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>版权登记</span></div>
+            <div class="application_list_val">
+              {eq name="record.copyright" value="0"} <span>是</span> {/eq}
+              {eq name="record.copyright" value="1"} <span>否</span> {/eq}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>申请专利</span></div>
+            <div class="application_list_val">
+               {foreach name="record.patent" item="vo"}
+				{eq name="vo" value="0"} <span> 发明 </span> {/eq}
+				{eq name="vo" value="1"} <span> 实用新型 </span> {/eq}
+				{eq name="vo" value="2"} <span> 外观设计 </span> {/eq}
+				{eq name="vo" value="3"} <span> 无 </span> {/eq}
+			  {/foreach}
+            </div>
+          </li>
+          <!--<li>
+            <div class="application_list_title"><span>所有权</span></div>
+            <div class="application_list_val">
+              {eq name="record.proprietary_rights" value="0"}
+                <span style=" padding-right:12px; ">单位</span>
+              {/eq}
+              {eq name="record.proprietary_rights" value="1"}
+                <span style=" padding-right:12px; ">个人</span>
+              {/eq}
+            </div>
+          </li>-->
+		  <li>
+            <div class="application_list_title"><span>所有权</span></div>
+            <div class="application_list_val">
+              {eq name="record.suoyouquan" value="0"}
+                <span style=" padding-right:12px; ">单位</span>
+              {/eq}
+              {eq name="record.suoyouquan" value="1"}
+                <span style=" padding-right:12px; ">个人</span>
+              {/eq}
+            </div>
+          </li>
+		  <li>
+            <div class="application_list_title"><span>尺寸</span></div>
+            <div class="application_list_val">
+            
+                <span style=" padding-right:12px; ">{$record.gsize}</span>
+            
+            </div>
+          </li>
+          <li style=" width:100%; height:auto; ">
+            <div class="application_list_title" style=" width:19%; "><span>作品说明</span></div>
+            <div class="application_list_val">
+              {empty name="record.works_description"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                {$record.works_description|htmlspecialchars_decode}
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>整体效果图*</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic1']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic1']}" target="_blank"><img src="{$record['work_pic1']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>主视图*</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic2']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic2']}" target="_blank"><img src="{$record['work_pic2']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>左视图*</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic3']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic3']}" target="_blank"><img src="{$record['work_pic3']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>俯视图*</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic4']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic4']}" target="_blank"><img src="{$record['work_pic4']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>后视图*</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic5']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic5']}" target="_blank"><img src="{$record['work_pic5']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>右视图*</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic6']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic6']}" target="_blank"><img src="{$record['work_pic6']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>
+		   <!-- <li>
+            <div class="application_list_title"><span>实物图或效果图*</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic7']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic7']}" target="_blank"><img src="{$record['work_pic7']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>
+          <li>
+            <div class="application_list_title"><span>轴测图</span></div>
+            <div class="application_list_val">
+              {empty name="record['work_pic7']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['work_pic7']}" target="_blank"><img src="{$record['work_pic7']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li> 
+
+          <li>
+            <div class="application_list_title"><span>展版图</span></div>
+            <div class="application_list_val">
+              {empty name="record['layout_pic']"}
+                <span style=" color:#CCC; ">暂无</span>
+                {else /}
+                <a href="{$record['layout_pic']}" target="_blank"><img src="{$record['layout_pic']|get_thumb}" height="30" /></a>
+              {/empty}
+            </div>
+          </li>-->
+        </ul>
+      </div>
+
+      <div class="o-form-group">
+        <label class="o-grid-4 o-form-label o-text-default" style=" padding-top:10px; color: #666; ">申请单位/个人</label>
+        <div class="o-grid-4 o-form-field">
+          <p class="o-ml o-input-right-p"><span style=" font-size:14px; font-weight:600; ">{$record.name}</span></p>
+        </div>
+      </div>
+      <div class="o-form-group">
+        <label class="o-grid-4 o-form-label o-text-default" style=" padding-top:10px; color: #666; ">地址</label>
+        <div class="o-grid-4 o-form-field">
+          <p class="o-ml o-input-right-p"><span style=" font-size:14px; font-weight:600; ">{$record.address}</span></p>
+        </div>
+      </div>
+      <div class="o-form-group">
+        <label class="o-grid-4 o-form-label o-text-default" style=" padding-top:10px; color: #666; ">邮编</label>
+        <div class="o-grid-4 o-form-field">
+          <p class="o-ml o-input-right-p"><span style=" font-size:14px; font-weight:600; ">{$record.zipcode}</span></p>
+        </div>
+      </div>
+      {if (( $Think.cookie.rolecode =='admin') OR ( $Think.cookie.rolecode =='province')) and ($record.checkstatus1 =='0')}
+	  
+	   <div class="o-form-group">
+		<label class="o-grid-4 o-form-label o-text-default" style=" padding-top:10px; color: #666; ">审核意见</label>
+		<div class="o-grid-4 o-form-field">
+		   <input type="checkbox" name="check1_remark2[]" title="请正确填写单位名称" value="请正确填写单位名称">请正确填写单位名称<br/>
+		  <input type="checkbox" name="check1_remark2[]" title="推荐单位请填写各地级市工信局、一级院校名称" value="推荐单位请填写各地级市工信局、一级院校名称">推荐单位请填写各地级市工信局、一级院校名称<br/>
+		  <input type="checkbox" name="check1_remark2[]" title="社会团体及个人无需填写推荐单位" value="社会团体及个人无需填写推荐单位">社会团体及个人无需填写推荐单位<br/>
+		  <input type="checkbox" name="check1_remark2[]" title="参赛产品（作品）须是2020年1月1日后上市或完成的" value="参赛产品（作品）须是2020年1月1日后上市或完成的">参赛产品（作品）须是2020年1月1日后上市或完成的<br/>
+		  <input type="checkbox" name="check1_remark2[]" title="请正确填写单位社会信用代码" value="请正确填写单位社会信用代码">请正确填写单位社会信用代码<br/>
+		  <input type="checkbox" name="check1_remark2[]" title="请正确填写邮箱" value="请正确填写邮箱">请正确填写邮箱
+		</div>
+	  </div>
+      <div class="o-form-group">
+        <label class="o-grid-4 o-form-label o-text-default" style=" padding-top:10px; color: #666; ">其他审核意见</label>
+				
+        <div class="o-grid-4 o-form-field">
+          <textarea name="check1_remark" id="check1_remark" placeholder="点击审核前建议您先输入对该作品的审核意见" class="textarea" data-check1_remark="{$record.check1_remark}"></textarea>
+        </div>
+      </div>
+	  
+	 
+      {/if}
+    </form>
+  </div>
+  {if (( $Think.cookie.rolecode =='admin')) }
+  <div class="btn">
+    <button type="button" class="layui-btn" data-id="{$record.id}" id="btnPassedAudit">审核通过</button>
+    <button type="button" class="layui-btn layui-btn-warm" data-id="{$record.id}" id="btnReject">审核驳回</button>
+    <button type="button" class="layui-btn layui-btn-danger" data-id="{$record.id}" id="btnRemove">删除作品</button>
+  </div>
+  {/if}
+</div>
+{/block}
+{block name="script"}
+<script>
+$("#list_btn_more").click(function (){
+  $(this).parent().parent().find("ul").slideToggle(600, function () {});
+});
+</script>
+<script src="/static/js/backend/works/view.js?051801"></script>
+{/block}

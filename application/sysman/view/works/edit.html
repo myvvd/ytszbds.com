@@ -1,0 +1,760 @@
+{extend name="base"/}
+{block name="style"}
+<style type="text/css">
+#page-expertgroup-edit .layui-form-item .layui-form-label{padding-left: 2px;padding-right: 0;width: 120px;}
+#page-expertgroup-edit .layui-form-item .checkboxs-box{width: 840px;}
+.pd15 {padding:15px;}
+.pd15 .layui-input-block {max-width:80%;min-width: 237px;}	
+	
+@media screen and (min-width: 768px) {
+#page-expertgroup-edit .layui-form-item .layui-upload {display:flex;width:100%;}
+.ml10 {margin-left:10px;}
+	
+}
+@media screen and (max-width: 767px) {
+.pd15 .layui-input-block { min-width:inherit;}	
+#page-expertgroup-edit .layui-form-item .layui-form-label{    width: 100%;text-align: left;}
+#page-expertgroup-edit .layui-form-item .layui-input-block {margin-left:0; float: left; width: 100% !important; max-width: inherit;}
+.m-hidden {display:none;}	
+	
+}
+	
+</style>
+{/block}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit pd15" id="page-expertgroup-edit">
+  <form class="layui-form" action="" lay-filter="form">
+		
+	 <div class="layui-form-item">
+		<label class="layui-form-label">所属地区</label>
+		<div class="layui-input-block">
+		  <select name="city">
+		  
+			<option value="">请选择所属地区</option>
+			{volist name="city" id="v"}
+			<option value="{$v['id']}">{$v['title']}</option>
+			{/volist}
+			
+		  </select>
+		</div>
+	  </div>
+	  <div class="layui-form-item">
+		<label class="layui-form-label">申报作品名称</label>
+		<div class="layui-input-block">
+		  <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入作品名称" class="layui-input">
+		</div>
+	  </div>
+	  <div class="layui-form-item">
+		<label class="layui-form-label">推荐单位</label>
+		<div class="layui-input-block">
+		  <input type="text" name="commend_company" lay-verify="commend_company" autocomplete="off" placeholder="请输入推荐单位" class="layui-input">
+		</div>
+	  </div>
+	  
+	   <div class="layui-form-item">
+		<label class="layui-form-label">参赛对象</label>
+		<div class="layui-input-block">
+		  {volist name="duix" id="vo"}
+		  <input type="radio" name="contestants" value="{$vo['id']}" title="{$vo['title']}">
+		  {/volist}
+		</div>
+	  </div>
+	  
+	   <div class="layui-form-item">
+		<label class="layui-form-label">申请组别</label>
+		<div class="layui-input-block">
+		  {volist name="zubie" id="v"}
+		  <input type="radio" name="declaration_group" value="{$v['id']}" title="{$v['title']}">
+		  {/volist}
+		</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+		<label class="layui-form-label">作品类别</label>
+		<div class="layui-input-block">
+		{volist name="shenb" id="v"}       
+		 <input type="radio" name="works_category" value="{$v['id']}" title="{$v['title']}">
+        {/volist}
+		</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+		<label class="layui-form-label">申报单位 /个人</label>
+		<div class="layui-input-block">
+		  <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入申报单位 /个人" class="layui-input">
+		</div>
+	  </div>
+	  
+	   <div class="layui-form-item">
+			<label class="layui-form-label">地址</label>
+			<div class="layui-input-block">
+			  <input type="text" name="address" lay-verify="address" autocomplete="off" placeholder="请输入地址" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">邮编</label>
+			<div class="layui-input-block">
+			  <input type="text" name="zipcode" lay-verify="zipcode" autocomplete="off" placeholder="请输入邮编" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">主创设计者</label>
+			<div class="layui-input-block">
+			  <input type="text" name="creator_designer" lay-verify="creator_designer" autocomplete="off" placeholder="请输入主创设计者" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">主创身份证号</label>
+			<div class="layui-input-block">
+			  <input type="text" name="creator_idcard" lay-verify="creator_idcard" autocomplete="off" placeholder="请输入主创身份证号" class="layui-input">
+			</div>
+	  </div>
+	  <div class="layui-form-item">
+			<label class="layui-form-label">主创护照</label>
+			<div class="layui-input-block">
+			  <input type="text" name="creator_hz" lay-verify="creator_hz" autocomplete="off" placeholder="请输入主创护照" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">主创电话/手机</label>
+			<div class="layui-input-block">
+			  <input type="text" name="creator_tel" lay-verify="creator_tel" autocomplete="off" placeholder="请输入主创电话/手机" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">主创邮箱</label>
+			<div class="layui-input-block">
+			  <input type="text" name="creator_email" lay-verify="creator_email" autocomplete="off" placeholder="请输入主创邮箱" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">团队成员</label>
+			<div class="layui-input-block">
+			  <input type="text" name="team_member" lay-verify="team_member" autocomplete="off" placeholder="请输入团队成员" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">联系人</label>
+			<div class="layui-input-block">
+			  <input type="text" name="contact_person" lay-verify="contact_person" autocomplete="off" placeholder="请输入联系人" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">联系人电话/手机</label>
+			<div class="layui-input-block">
+			  <input type="text" name="contact_tel" lay-verify="contact_tel" autocomplete="off" placeholder="请输入联系人电话/手机" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">联系人邮箱</label>
+			<div class="layui-input-block">
+			  <input type="text" name="contact_email" lay-verify="contact_email" autocomplete="off" placeholder="请输入联系人邮箱" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item layui-form-text">
+		<label class="layui-form-label">个人简介</label>
+		<div class="layui-input-block" style="width: 60%;">
+		  <textarea name="works_profile" placeholder="请输入个人简介" class="layui-textarea"></textarea>
+		</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+		 <div class="layui-upload">	
+		  <label class="layui-form-label"> 营业执照</label>
+			<div class="layui-input-block">
+			 <div class="layui-upload-list">
+			 <button type="button" class="layui-btn" id="validation_a_btn">选择文件</button>
+			<input type="hidden" name="validation_a" class="layui-input">
+			<img class="layui-upload-img" id="validation_a_img">
+			<p id="demoText"></p>
+		  </div>
+			</div>
+		  </div>
+	  </div>
+
+	  <div class="layui-form-item">
+	  <div class="layui-upload">
+		  <label class="layui-form-label">身份证</label>
+		  <div class="layui-input-block">
+		  <div class="layui-upload-list">
+		  <button type="button" class="layui-btn" id="validation_b_btn">选择文件</button>
+			<input type="hidden" name="validation_b" class="layui-input">
+			<img class="layui-upload-img" id="validation_b_img">
+			<p id="demoText"></p>
+		  </div>
+		  </div>
+	  </div> 
+	  </div>
+	  
+	  <div class="layui-form-item">
+	  <div class="layui-upload">
+		  <label class="layui-form-label">学生证</label>
+		  <div class="layui-input-block">
+		  <div class="layui-upload-list">
+		  <button type="button" class="layui-btn" id="validation_c_btn">选择文件</button>
+			<input type="hidden" name="validation_c" class="layui-input">
+			<img class="layui-upload-img" id="validation_c_img">
+			<p id="demoText"></p>
+		  </div>
+		  </div>
+	  </div> 
+	  </div>
+	 
+	  <div class="layui-form-item">
+			  <label class="layui-form-label">完成日期</label>
+			  <div class="layui-input-block">
+				<input type="text" name="completion_date" id="completion_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+			  </div>
+		</div>
+	  <div class="layui-form-item">
+			<label class="layui-form-label">版权登记</label>
+			<div class="layui-input-block">
+			  <input type="radio" name="copyright" value="0" lay-verify="otherReq"  title="是">
+			  <input type="radio" name="copyright" value="1" lay-verify="otherReq"  title="否">
+			  
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">已申请专利</label>
+			<div class="layui-input-block">
+			  <input type="radio" name="patent" value="0" lay-verify="otherReq"  title="发明">
+			  <input type="radio" name="patent" value="1" lay-verify="otherReq"  title="实用新型">
+			  <input type="radio" name="patent" value="2" lay-verify="otherReq"  title="外观设计">
+			  <input type="radio" name="patent" value="3" lay-verify="otherReq"  title="无">
+			  
+			</div>
+		  </div>
+		<div class="layui-form-item">
+			<label class="layui-form-label m-hidden"></label>
+			<div class="layui-input-block">
+			<div class="layui-upload">
+			  <button type="button" class="layui-btn layui-btn-normal" id="test8">选择文件</button>
+			  <input class="layui-upload-file" type="file" accept="" name="file">
+			  <input type="hidden" name="pdf_upload_url" class="layui-input" >
+			  <button type="button" class="layui-btn ml10" id="test9">开始上传</button>
+			  <a style="text-decoration:none;" id="pdf_upload_url_a" class="layui-btn layui-btn-normal">相关材料</a>
+			</div>
+			</div>	
+	  </div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">所有权</label>
+			<div class="layui-input-block">
+			  <input type="radio" name="proprietary_rights" value="0" lay-verify="otherReq"  title="单位">
+			  <input type="radio" name="proprietary_rights" value="1" lay-verify="otherReq"  title="个人">
+			</div>
+		</div>	
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">作品说明</label>
+			<div class="layui-input-block" style="width: 60%;">
+			  <textarea name="works_description" placeholder="请输入作品说明" class="layui-textarea"></textarea>
+			</div>
+		</div>
+	  <div class="layui-form-item">
+	  <div class="layui-upload">
+		  <label class="layui-form-label">整体效果图*</label>
+		  <div class="layui-input-block">
+			  <div class="layui-upload-list">
+				<button type="button" class="layui-btn" id="file_work_pic1_btn">选择文件</button>
+				<input type="hidden" name="work_pic1" class="layui-input">
+				<img class="layui-upload-img" id="file_work_pic1_img">
+				<p id="demoText"></p>
+			  </div>
+		  </div>
+	  </div> 
+	  </div>
+	  <div class="layui-form-item">
+	   <div class="layui-upload">
+		   <label class="layui-form-label">主视图*</label>
+		  <div class="layui-input-block">
+		   <div class="layui-upload-list">
+		   <button type="button" class="layui-btn" id="file_work_pic2_btn">选择文件</button>
+			<input type="hidden" name="work_pic2" class="layui-input">
+			<img class="layui-upload-img" id="file_work_pic2_img">
+			<p id="demoText"></p>
+		  </div>
+		   </div>
+	  </div> 
+	  </div>
+	  <div class="layui-form-item">
+	   <div class="layui-upload">
+		   <label class="layui-form-label">左视图*</label>
+		  <div class="layui-input-block">
+		   <div class="layui-upload-list">
+		   <button type="button" class="layui-btn" id="file_work_pic3_btn">选择文件</button>
+			<input type="hidden" name="work_pic3" class="layui-input">
+			<img class="layui-upload-img" id="file_work_pic3_img">
+			<p id="demoText"></p>
+		  </div>
+		   </div>
+	  </div> 
+	  </div>  
+	  <div class="layui-form-item">
+	   <div class="layui-upload">
+		   <label class="layui-form-label">俯视图*</label>
+		  <div class="layui-input-block">
+		   <div class="layui-upload-list">
+		   <button type="button" class="layui-btn" id="file_work_pic4_btn">选择文件</button>
+			<input type="hidden" name="work_pic4" class="layui-input">
+			<img class="layui-upload-img" id="file_work_pic4_img">
+			<p id="demoText"></p>
+		  </div>
+		   </div>
+	  </div> 
+	  </div>
+	  <div class="layui-form-item">
+	   <div class="layui-upload">
+		   <label class="layui-form-label">后视图*</label>
+		  <div class="layui-input-block">
+		   <div class="layui-upload-list">
+		   <button type="button" class="layui-btn" id="file_work_pic5_btn">选择文件</button>
+			<input type="hidden" name="work_pic5" class="layui-input">
+			<img class="layui-upload-img" id="file_work_pic5_img">
+			<p id="demoText"></p>
+		  </div>
+		   </div>
+	  </div> 
+	  </div>
+	  <div class="layui-form-item">
+	   <div class="layui-upload">
+		   <label class="layui-form-label">右视图*</label>
+		  <div class="layui-input-block">
+		   <div class="layui-upload-list">
+		   <button type="button" class="layui-btn" id="file_work_pic6_btn">选择文件</button>
+			<input type="hidden" name="work_pic6" class="layui-input">
+			<img class="layui-upload-img" id="file_work_pic6_img">
+			<p id="demoText"></p>
+		  </div>
+		   </div>
+	  </div> 
+	  </div>
+<!-- 	  <div class="layui-form-item">
+	   <div class="layui-upload">
+		   <label class="layui-form-label"><button type="button" class="layui-btn" id="file_work_pic7_btn">仰视图</button></label>
+		  <div class="layui-input-block">
+		   <div class="layui-upload-list">
+			<input type="hidden" name="work_pic7" class="layui-input">
+			<img class="layui-upload-img" id="file_work_pic7_img">
+			<p id="demoText"></p>
+		  </div>
+		   </div> 
+	  </div> 
+	  </div> 
+	  <div class="layui-form-item">
+	   <div class="layui-upload">
+		   <label class="layui-form-label">展板图</label>
+		  <div class="layui-input-block">
+		   <div class="layui-upload-list">
+		   <button type="button" class="layui-btn" id="layout_pic_btn">选择文件</button>
+			<input type="hidden" name="layout_pic" class="layui-input">
+			<img class="layui-upload-img" id="layout_pic_img">
+			<p id="demoText"></p>
+		  </div>
+		   </div>
+	  </div> 
+	  </div>-->
+	  <div class="layui-form-item">
+		  <label class="layui-form-label m-hidden"></label>
+		<div class="layui-input-block">
+		  <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">提交保存</button>
+		  <input type="hidden" name="id">
+		 <button type="button" class="layui-btn layui-btn-normal" onclick="closeTab()">关闭</button>
+		</div>
+	  </div>	  
+	</form>
+</div>
+{/block}
+{block name="script"}
+<script>
+var infostr =  '{$info|raw}';
+
+infostr.replace(/\n/g,"\\\\n")
+
+var info = JSON.parse(infostr.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));
+
+form.val('form', info);
+
+
+//form.render();
+
+if(info.validation_a){
+	$("#validation_a_img").attr("src",info.validation_a);
+}
+if(info.validation_b){
+	$("#validation_b_img").attr("src",info.validation_b);
+}
+
+if(info.validation_c){
+	$("#validation_c_img").attr("src",info.validation_c);
+}
+
+if(info.work_pic1){
+	$("#file_work_pic1_img").attr("src",info.work_pic1);
+}
+
+if(info.work_pic2){
+	$("#file_work_pic2_img").attr("src",info.work_pic2);
+}
+
+if(info.work_pic3){
+	$("#file_work_pic3_img").attr("src",info.work_pic3);
+}
+
+if(info.work_pic4){
+	$("#file_work_pic4_img").attr("src",info.work_pic4);
+}
+
+if(info.work_pic5){
+	$("#file_work_pic5_img").attr("src",info.work_pic5);
+}
+
+if(info.work_pic6){
+	$("#file_work_pic6_img").attr("src",info.work_pic6);
+}
+
+if(info.work_pic7){
+	$("#file_work_pic7_img").attr("src",info.work_pic7);
+}
+
+if(info.layout_pic){
+	$("#layout_pic_img").attr("src",info.layout_pic);
+}
+
+if(info.pdf_upload_url){
+	$("#pdf_upload_url_a").show().attr("href",info.pdf_upload_url);
+}
+
+laydate.render({elem: '#completion_date',max: 0});
+
+
+form.on('submit(submit)', function (data) {
+  loading =layer.load(1, {shade: [0.1,'#fff']});
+  $.post('{:url("save")}', data.field, function (res) {
+      layer.close(loading);
+      if (res.code > 0) {
+          layer.msg('保存成功', {time: 1800, icon: 1}, closeTab);
+      } else {
+          layer.msg('保存失败，请检查输入是否正确或稍后再试', {time: 1800, icon: 2});
+      }
+  });
+});
+
+function closeTab() {
+  parent.tab.deleteTab(parent.tab.getCurrentTabId());
+}
+</script>
+
+
+<script>
+layui.use(['upload', 'element', 'layer'], function(){
+  var $ = layui.jquery
+  ,upload = layui.upload
+  ,element = layui.element
+  ,layer = layui.layer;
+  
+  //常规使用 - 普通图片上传
+  var uploadInst1 = upload.render({
+    elem: '#file_work_pic1_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#file_work_pic1_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="work_pic1"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传2
+  var uploadInst2 = upload.render({
+    elem: '#file_work_pic2_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#file_work_pic2_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="work_pic2"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传3
+  var uploadInst3 = upload.render({
+    elem: '#file_work_pic3_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#file_work_pic3_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="work_pic3"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传4
+  var uploadInst4 = upload.render({
+    elem: '#file_work_pic4_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#file_work_pic4_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="work_pic4"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传5
+  var uploadInst5 = upload.render({
+    elem: '#file_work_pic5_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#file_work_pic5_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="work_pic5"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传6
+  var uploadInst6 = upload.render({
+    elem: '#file_work_pic6_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#file_work_pic6_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="work_pic6"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传7
+  var uploadInst7 = upload.render({
+    elem: '#file_work_pic7_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#file_work_pic7_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="work_pic7"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传8
+  var uploadInst8 = upload.render({
+    elem: '#layout_pic_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#layout_pic_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="layout_pic"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+  var uploadInst9 = upload.render({
+    elem: '#validation_a_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#validation_a_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="validation_a"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+  var uploadInst10 = upload.render({
+    elem: '#validation_b_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#validation_b_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="validation_b"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+  var uploadInst11 = upload.render({
+    elem: '#validation_c_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#validation_c_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="validation_c"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+    //选完文件后不自动上传
+  upload.render({
+    elem: '#test8'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,auto: false
+    //,multiple: true
+    ,bindAction: '#test9'
+    ,done: function(res){
+	  if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+	  $('input[name="pdf_upload_url"]').val(res.data);
+	  $("#pdf_upload_url_a").show().attr("href",res.data);
+	  
+      layer.msg('上传成功');
+     
+    }
+  });
+});
+</script>
+
+
+
+{/block}

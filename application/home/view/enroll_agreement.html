@@ -1,0 +1,19 @@
+{extend name="bgbase"}
+{block name="style"}
+<style>
+.content {margin: 0 auto 80px;width: 760px;}
+.content h1{margin: 50px 0 40px 0;font-size: 18px;color: #535353;font-weight: bold;text-align: center;}
+.content hr{width: 125px;margin: 0 auto;margin-bottom: 75px;}
+.content p{font-size: 16px;color: #434343;text-align: left;line-height: 2}
+</style>
+{/block}
+{block name="body"}
+<div class="content">
+	{volist name="listcate" id="v"}
+    {if  $v['cateid'] == 13}
+   {$v['content']|raw}
+    {/if}
+    {/volist}
+ 
+</div>
+{/block}

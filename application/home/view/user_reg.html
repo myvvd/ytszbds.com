@@ -1,0 +1,48 @@
+{extend name="bgbase"}
+{block name="body"}
+<div class="usertool-box reg-box reg_bg">
+<!--   <div class="img-box"><img src="/static/images/web/reg-bg.jpg" alt=""></div>
+ -->  <div class="form-box">
+   <h3 style="color:#333333">注册</h3>
+    <form class="layui-form" onsubmit="return false">
+      <input type="hidden" name="action" value="register">
+      <div class="form-group">
+        <i class="layui-icon layui-icon-cellphone"></i>
+        <div class="splitter"></div>
+        <input type="text" maxlength="11" placeholder="填写手机号" name="mobile" class="form-control" lay-verify="phone" onkeyup="value=value.replace(/[^\d]/g,'')">
+      </div>
+      <div class="form-group">
+        <i class="layui-icon layui-icon-vercode"></i>
+        <div class="splitter"></div>
+        <input type="text" placeholder="输入短信验证码" name="smscode" class="form-control" maxlength="4" lay-verify="required|number" onkeyup="value=value.replace(/[^\d]/g,'')">
+        <button class="smscode-button" >发送短信验证码</button>
+      </div>
+      <div class="form-group">
+        <i class="layui-icon layui-icon-key"></i>
+        <div class="splitter"></div>
+        <input type="password" placeholder="设置密码" name="password" class="form-control" maxlength="20" lay-verify="required">
+      </div>
+      <div class="form-group">
+        <i class="layui-icon layui-icon-password"></i>
+        <div class="splitter"></div>
+        <input type="password" placeholder="确认密码" name="confirmpwd" class="form-control" maxlength="20" lay-verify="required">
+      </div>
+      <div class="form-submit"><button class="layui-btn" lay-submit lay-filter="smtReg">注册</button></div>
+    </form>
+  </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+form.on('submit(smtReg)',function (data) {
+  $.post('/reg',data.field,function (res) {
+    if (res.code!=1) {
+      return layer.alert(res.msg?res.msg:'注册出错啦！');
+    }
+    layer.msg('恭喜，注册成功！请使用注册使用的手机号密码登录');
+    setTimeout(function() {top.location.href = '/login'}, 5000);
+  })
+  return false;
+});
+</script>
+{/block}

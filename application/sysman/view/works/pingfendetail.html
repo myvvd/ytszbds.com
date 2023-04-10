@@ -1,0 +1,128 @@
+{extend name="base"/}
+{block name="style"}
+<style>
+.main {margin: 20px;background: #FFF;padding: 20px;min-height: 600px;}
+h4 {font-size: 18px;color: inherit;font-family: inherit;font-weight: 500;line-height: 1.2;}
+a.o-btn-blue:link, a.o-btn-blue:visited {color: #ffffff;}
+.o-fr {float: right !important;}
+.o-btn-size-small {font-size: 12px;padding: 5px 10px;}
+.o-btn-blue {background-color: #00a7e7;border-color: #00a7e7;}
+.o-mt-20 {margin-top: 20px;}
+.o-form {padding: 10px;box-sizing: border-box;-webkit-box-sizing: border-box;}
+.o-form-group {margin-top: 10px;margin-bottom: 10px;overflow: hidden;}
+.o-form-horizontal .o-form-label {padding-right: 10px;text-align: right;}
+.o-form-horizontal .o-form-label{margin-top: 0;margin-bottom: 0;padding-top: 12px;}
+.o-text-default {font-size: 14px;}
+.o-grid-4 {width: 33.33333333%;}
+[class*="o-grid-"] {float: left;padding-left: 0;position: relative;}
+label {display: inline-block;font-weight: bold;}
+.o-input-right-p {height: 40px;line-height: 45px;font-size: 14px;}
+.o-ml {margin-left: 10px;}
+a:visited {color: #333;text-decoration: none;}
+a:visited {outline: 0;}
+.o-fl {float: left !important;}
+.o-fr {float: right !important;}
+.o-grid-3 {width: 25%;}
+h3{margin-left: 30%;font-weight: bold;color:#00a7e7;}
+</style>
+{/block}
+{block name="body"}
+<!-- 管理员查看所有专家评分 -->
+<div class="main">
+  <h4>专家评分<a href="javascript:history.go(-1)" class="o-fr o-btn o-radius o-btn-blue o-btn-size-small o-back">返回</a></h4>
+  <div class="form-content o-mt-20">
+    <form class="o-form o-form-horizontal">
+      <div class="o-form-group">
+          <label class="o-grid-4 o-form-label o-text-default">作品名称</label>
+          <div class="o-grid-8 o-form-field">
+              <p class="o-ml o-input-right-p">{$gradeinfo['title']}<a href="/sysman/works/view?id={$gradeinfo['id']}" target="_blank"> <查看详情> </a></p>
+          </div>
+      </div>
+      <div class="o-form-group">
+          <label class="o-grid-4 o-form-label o-text-default">申报组别</label>
+          <div class="o-grid-8 o-form-field">
+              {empty name="gradeinfo.declaration_group"}
+                <p class="o-ml o-input-right-p">暂无</span>
+                {else /}
+                {eq name="gradeinfo.declaration_group" value="C"}
+                  <p class="o-ml o-input-right-p">产品组</p>
+                {/eq}
+                {eq name="gradeinfo.declaration_group" value="G"}
+                  <p class="o-ml o-input-right-p">概念组</p>
+                {/eq}
+              {/empty}
+          </div>
+			</div>
+			{empty name="pingfenList"}
+			  <hr><h3>暂无专家评分……</h3>
+      {else /}
+				{volist name="pingfenList" id="vo"}
+        <div style=" border-bottom:1px solid #CCC; overflow:hidden;">
+            <b class="o-fl">专家：{$vo.username}</b>
+            <span class="o-fr">得分：{$vo.totalscore}</span>
+				</div>
+				{if( $Think.cookie.experttype =='chusai') }
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">先导性</label>
+					<div class="o-grid-3 o-form-field">
+						<p class="o-ml o-input-right-p"> {$vo.item1}</p>
+					</div>
+        </div>
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">创新性</label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p"> {$vo.item2}</p>
+					</div>
+        </div>
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">实用性</label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p"> {$vo.item3}</p>
+					</div>
+        </div>
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">美学效果</label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p"> {$vo.item4}</p>
+					</div>
+        </div>
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">人机工学</label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p">{$vo.item5}</p>
+					</div>
+        </div>
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">品质</label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p">{$vo.item6}</p>
+					</div>
+        </div>
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">环保型</label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p">{$vo.item7}</p>
+					</div>
+        </div>
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default">经济性</label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p">{$vo.item8}</p>
+					</div>
+				</div>
+				{/if}
+				{if ($Think.cookie.experttype =='chusai') OR ( $Think.cookie.experttype =='fusai') OR ( $Think.cookie.experttype =='final')}
+        <div class="o-form-group">
+					<label class="o-grid-4 o-form-label o-text-default"><b>总分</b></label>
+					<div class="o-grid-3 o-form-field">
+							<p class="o-ml o-input-right-p">{$vo.totalscore}</p>
+					</div>
+				</div>
+				{/if}
+        {/volist}
+			{/empty}
+
+    </form>
+</div>
+</div>
+{/block}

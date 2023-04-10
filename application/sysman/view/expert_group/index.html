@@ -1,0 +1,60 @@
+{extend name="base"/}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit">
+  <div class="layui-col-md12">
+    <a data-href="/sysman/expert_group/edit?id=0" data-title="新增专家分组" data-icon="layui-icon layui-icon-user" class="addtab layui-btn layui-btn-normal" id="btnAdd">新增</a>
+    <button type="button" class="layui-btn layui-btn-warm" onclick="location.reload()">刷新</button>
+  </div>
+  <table class="layui-table" id="tblList" lay-filter="tblList"></table>
+</div>
+<script type="text/html" id="action">
+  <a data-href="{:url('edit')}?id={{d.id}}" data-title="编辑专家分组" data-icon="layui-icon layui-icon-user" class="addtab layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+{/block}
+{block name="script"}
+<script>
+var tableIn = table.render({
+  width:836,
+  id: 'tblList',
+  elem: '#tblList',
+  url: '/sysman/expert_group/index',
+  method: 'get',
+  page: false,
+  cols: [
+    [
+      { checkbox: true},
+      { field: 'name', title: '分组名'},
+      { field: 'works_category', title: '负责作品类型'},
+      { field: 'city', title: '负责市区'},
+      { title:'操作', align:'center', toolbar: '#action',width:120}
+    ]
+  ],
+});
+
+
+
+table.on("tool(tblList)", function(obj) {
+  var data = obj.data;
+  if (obj.event === 'del') {
+    layer.confirm("您确定要删除该分组吗？", function(index) {
+      var loading = layer.load(1, { shade: [0.1, "#fff"] });
+      $.post("{:url('del')}", { id: data.id }, function(res) {
+        layer.close(loading);
+        if (res.code === 1) {
+          layer.msg('删除成功', { time: 1000, icon: 1 });
+          tableIn.reload();
+        } else {
+          layer.msg('删除失败！', { time: 1000, icon: 2 });
+        }
+      });
+      layer.close(index);
+    });
+  } else if (obj.event==='edit'){
+    var el = $(this);
+    var newTab = el.data();
+    parent.tab.tabAdd(newTab);
+  }
+});
+</script>
+{/block}

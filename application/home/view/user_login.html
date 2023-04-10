@@ -1,0 +1,92 @@
+{extend name="bgbase"}
+{block name="style"}
+<style>
+.login-tabs .active{background-color: #f00;}
+</style>
+{/block}
+{block name="body"}
+<div class="login-box usertool-box logo_bg">
+ <!--  <div class="img-box"><img src="/static/images/web/login-bg.jpg" alt=""></div> -->
+  <div class="form-box">
+    <h3>登录</h3>
+      <div class="tabs layui-tab">
+        <ul class="tabs-title">
+          <li class="active">申报登录</li>
+          <li>专家登录</li>
+        </ul>
+        <div class="tabs-content">
+          <div class="layui-show item">
+
+            <form class="layui-form" onsubmit="return false">
+              <input type="hidden" name="ut" value="0">
+              <div class="form-group">
+                <i class="layui-icon layui-icon-cellphone"></i>
+                <div class="splitter"></div>
+                <input type="text" maxlength="11" placeholder="填写手机号" name="mobile" class="form-control" lay-verify="phone">
+              </div>
+              <div class="form-group">
+                <i class="layui-icon layui-icon-key"></i>
+                <div class="splitter"></div>
+                <input type="password" placeholder="登录密码" name="password" class="form-control" maxlength="20">
+              </div>
+              <div class="form-checkbox">
+                <span>
+                  <input type="checkbox" name="rememberPwd" id="rememberPwd" lay-ignore>
+                  <label for="rememberPwd">记住密码</label>
+                </span>
+                <a href="/forgetpwd">忘记密码</a>
+              </div>
+              <div class="form-submit"><button class="layui-btn" lay-submit lay-filter="smtLogin">立即登录</button></div>
+            </form>
+          </div>
+          <div class="item layui-hide">
+            <!-- specialist login -->
+            <form class="layui-form" onsubmit="return false">
+              <input type="hidden" name="ut" value="1">
+              <div class="form-group">
+                <i class="layui-icon layui-icon-username"></i>
+                <div class="splitter"></div>
+                <input type="text" maxlength="30" placeholder="帐号" name="username" class="form-control">
+              </div>
+              <div class="form-group">
+                <i class="layui-icon layui-icon-key"></i>
+                <div class="splitter"></div>
+                <input type="password" placeholder="密码" name="password" class="form-control" maxlength="20">
+              </div>
+              <div class="form-checkbox">
+                <span>
+                  <input type="checkbox" name="rememberPwd" id="specialist-remember-pwd" lay-ignore>
+                  <label for="specialist-remember-pwd">记住密码</label>
+                </span>
+              </div>
+              <div class="form-submit"><button class="layui-btn" lay-submit lay-filter="smtLogin">立即登录</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{/block}
+{block name="script"}
+<script>
+$('.tabs-title li').click(function () {
+  var el = $(this);
+  el.siblings().removeClass('active');
+  el.addClass('active');
+  var elCnt = $('.tabs-content div.item').eq(el.index());
+  elCnt.siblings().removeClass('layui-show').addClass('layui-hide');
+  elCnt.removeClass('layui-hide').addClass('layui-show');
+})
+
+form.on('submit(smtLogin)', function(data){
+  $.post('/login',data.field,function (res) {
+    if (res.code!=1) {
+      return layer.alert(res.msg?res.msg:'登录失败，请检查输入的帐号密码是否正确');
+    }
+    layer.msg('登录成功');
+    setTimeout(function() {top.location.href = res.url}, 1000);
+  })
+  return false;
+});
+</script>
+{/block}

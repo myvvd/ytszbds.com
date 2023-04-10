@@ -1,0 +1,70 @@
+{volist name="listcate" id="vo"}
+
+  {if $vo['ftitle'] == 'dbxx' && $vo['cateid'] == '10'}
+    {$vo.content|raw}
+  {/if}
+
+{/volist}
+<script src="/static/plugins/layui/layui.all.js"></script>
+<script>
+var $=layui.$,form=layui.form,upload=layui.upload,layer=layui.layer,laydate=layui.laydate,upload = layui.upload;;
+//顶部导航栏不同模块增加style
+var headerNavLinks = $('.nav li a');
+var headerUserCenterLinksImg = $('.usercenter li');
+var headerUserCenterLinks = $('.usercenter li a');
+var cookie = {:json_encode($Think.cookie.uid)};
+switch (window.location.pathname) {
+  case '/index':
+    headerNavLinks.eq(0).css('color','#0094e0')
+    break;
+  case '/news':
+    headerNavLinks.eq(1).css('color','#0094e0')
+    break;
+  case '/view':
+    headerNavLinks.eq(1).css('color','#0094e0')
+    break;
+  case '/enroll':
+    headerNavLinks.eq(2).css('color','#FFC700');
+    headerUserCenterLinks.eq(0).css('color','#fff')
+    headerUserCenterLinks.eq(1).css('color','#fff')
+    if(cookie){headerUserCenterLinksImg.eq(1).find('img').attr('src','/static/images/web/my-white.png')}
+    headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/enroll_agreement':
+    headerNavLinks.eq(2).css('color','#FFC700');
+    headerUserCenterLinks.eq(0).css('color','#fff')
+    headerUserCenterLinks.eq(1).css('color','#fff')
+    if(cookie){headerUserCenterLinksImg.eq(1).find('img').attr('src','/static/images/web/my-white.png')}
+    headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/login':
+    headerUserCenterLinks.eq(0).addClass('active');
+    headerUserCenterLinks.eq(1).css('color','#fff')
+    headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/reg':
+    headerUserCenterLinks.eq(0).css('color','#fff')
+    headerUserCenterLinks.eq(1).addClass('active');
+    headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/forgetpwd':
+    headerUserCenterLinks.eq(0).css('color','#fff')
+    headerUserCenterLinks.eq(1).addClass('active');
+    headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  case '/ucenter':
+    headerUserCenterLinks.eq(0).addClass('active');
+    if(cookie){headerUserCenterLinksImg.eq(1).find('img').attr('src','/static/images/web/my-white.png')}
+    headerUserCenterLinks.eq(1).css('color','#fff');
+    headerUserCenterLinksImg.eq(2).find('img').attr('src','/static/images/web/my-white.png')
+    break;
+  default:
+    headerNavLinks.eq(0).css('color','#0094e0')
+    break;
+}
+
+// function temporary() {
+//   layer.alert('尚未开放,请耐心等待:)',{title:'提示'})
+// }
+</script>
+<script src="/static/js/web/common.js"></script>

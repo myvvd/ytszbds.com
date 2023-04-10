@@ -1,0 +1,334 @@
+{extend name="base"/}
+{block name="style"}
+<style type="text/css">
+#page-expertgroup-edit .layui-form-item .layui-form-label{padding-left: 2px;padding-right: 0;width: 120px;}
+#page-expertgroup-edit .layui-form-item .checkboxs-box{width: 840px;}
+.pd15 {padding:15px;}
+.pd15 .layui-input-block {max-width:80%;min-width: 237px;}	
+	
+@media screen and (min-width: 768px) {
+#page-expertgroup-edit .layui-form-item .layui-upload {display:flex;width:100%;}
+.ml10 {margin-left:10px;}
+	
+}
+@media screen and (max-width: 767px) {
+.pd15 .layui-input-block { min-width:inherit;}	
+#page-expertgroup-edit .layui-form-item .layui-form-label{    width: 100%;text-align: left;}
+#page-expertgroup-edit .layui-form-item .layui-input-block {margin-left:0; float: left; width: 100% !important; max-width: inherit;}
+.m-hidden {display:none;}	
+	
+}
+	
+</style>
+{/block}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit pd15" id="page-expertgroup-edit">
+  <form class="layui-form" action="" lay-filter="form">
+
+	  <div class="layui-form-item">
+		<label class="layui-form-label">网站名称</label>
+		<div class="layui-input-block">
+		  <input type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入网站名称" class="layui-input">
+		</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+		 <div class="layui-upload">	
+		  <label class="layui-form-label"> 网站logo</label>
+			<div class="layui-input-block">
+			 <div class="layui-upload-list">
+				<input type="hidden" name="logo" class="layui-input">
+				<button type="button" class="layui-btn" id="logo_btn">选择图片</button>
+				<img class="layui-upload-img" id="logo_img">
+				<p id="demoText"></p>
+			  </div>
+			</div>
+		  </div>
+	  </div>
+	  	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">主办单位</label>
+			<div class="layui-input-block">
+			  <input type="text" name="host" lay-verify="host" autocomplete="off" placeholder="请输入主办单位" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">支持单位</label>
+			<div class="layui-input-block">
+			  <input type="text" name="support" lay-verify="support" autocomplete="off" placeholder="请输入支持单位" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">承办单位</label>
+			<div class="layui-input-block">			  
+			   <textarea placeholder="请输入承办单位" class="layui-textarea" name="undertake" id="undertake" ></textarea>
+			   <p style="color:red;">不同单位间需要使用英文下的逗号隔开</p>
+			</div>
+	  </div>
+	  
+	   <div class="layui-form-item">
+			<label class="layui-form-label">协办单位</label>
+			<div class="layui-input-block">			  
+			   <textarea placeholder="请输入协办单位" class="layui-textarea" name="xieban" id="xieban" ></textarea>
+			   <p style="color:red;">不同单位间需要使用英文下的逗号隔开</p>
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">组委会</label>
+			<div class="layui-input-block">
+			  <input type="text" name="zuwei" lay-verify="zuwei" autocomplete="off" placeholder="请输入组委会" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">联系人</label>
+			<div class="layui-input-block">
+			  <input type="text" name="contacts" lay-verify="contacts" autocomplete="off" placeholder="请输入联系人" class="layui-input">
+			</div>
+	  </div>
+	  <div class="layui-form-item">
+			<label class="layui-form-label">联系电话</label>
+			<div class="layui-input-block">
+			  <input type="text" name="tel" lay-verify="tel" autocomplete="off" placeholder="请输入联系电话" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">微信</label>
+			<div class="layui-input-block">
+			  <input type="text" name="weixin" lay-verify="weixin" autocomplete="off" placeholder="请输入微信号" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">邮箱</label>
+			<div class="layui-input-block">
+			  <input type="text" name="email" lay-verify="email" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
+			</div>
+	  </div>
+	  
+	  <div class="layui-form-item">
+			<label class="layui-form-label">备案号</label>
+			<div class="layui-input-block">
+			  <input type="text" name="beian" lay-verify="beian" autocomplete="off" placeholder="请输入备案号" class="layui-input">
+			</div>
+	  </div>
+	  
+	
+	  
+	  <div class="layui-form-item">
+		 <div class="layui-upload">	
+		  <label class="layui-form-label"> 二维码1</label>
+			<div class="layui-input-block">
+			 <div class="layui-upload-list">
+				<input type="hidden" name="erweima_one" class="layui-input">
+				<button type="button" class="layui-btn" id="erweima_one_btn">选择图片</button>
+				<img class="layui-upload-img" id="erweima_one_img">
+				<p id="demoText"></p>
+			  </div>
+			</div>
+		  </div>
+	  </div>
+	  
+	   <div class="layui-form-item">
+		 <div class="layui-upload">	
+		  <label class="layui-form-label"> 二维码2</label>
+			<div class="layui-input-block">
+			 <div class="layui-upload-list">
+				<input type="hidden" name="erweima_two" class="layui-input">
+				<button type="button" class="layui-btn" id="erweima_two_btn">选择图片</button>
+				<img class="layui-upload-img" id="erweima_two_img">
+				<p id="demoText"></p>
+			  </div>
+			</div>
+		  </div>
+	  </div>
+	   <div class="layui-form-item">
+		 <div class="layui-upload">	
+		  <label class="layui-form-label"> 底部LOGO</label>
+			<div class="layui-input-block">
+			 <div class="layui-upload-list">
+				<input type="hidden" name="footlogo" class="layui-input">
+				<button type="button" class="layui-btn" id="footlogo_btn">选择图片</button>
+				<img class="layui-upload-img" id="footlogo_img">
+				<p id="demoText"></p>
+			  </div>
+			</div>
+		  </div>
+	  </div>
+
+	  
+	  <div class="layui-form-item">
+		  <label class="layui-form-label m-hidden"></label>
+		<div class="layui-input-block">
+		  <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">提交保存</button>
+		  <input type="hidden" name="id">
+		 <button type="button" class="layui-btn layui-btn-normal" onclick="closeTab()">关闭</button>
+		</div>
+	  </div>	  
+	</form>
+</div>
+{/block}
+{block name="script"}
+<script>
+var infostr =  '{$info|raw}';
+
+infostr.replace(/\n/g,"\\\\n")
+
+var info = JSON.parse(infostr.replace(/\n/g,"\\n").replace(/\r/g,"\\r"));
+
+form.val('form', info);
+
+
+//form.render();
+
+if(info.logo){
+	$("#logo_img").attr("src",info.logo);
+}
+if(info.erweima_one){
+	$("#erweima_one_img").attr("src",info.erweima_one);
+}
+
+if(info.erweima_two){
+	$("#erweima_two_img").attr("src",info.erweima_two);
+}
+
+if(info.footlogo){
+	$("#footlogo_img").attr("src",info.footlogo);
+}
+
+
+form.on('submit(submit)', function (data) {
+  loading =layer.load(1, {shade: [0.1,'#fff']});
+  $.post('{:url("save")}', data.field, function (res) {
+      layer.close(loading);
+      if (res.code > 0) {
+          layer.msg('保存成功', {time: 1800, icon: 1}, closeTab);
+      } else {
+          layer.msg('保存失败，请检查输入是否正确或稍后再试', {time: 1800, icon: 2});
+      }
+  });
+});
+
+function closeTab() {
+  parent.tab.deleteTab(parent.tab.getCurrentTabId());
+}
+</script>
+
+
+<script>
+layui.use(['upload', 'element', 'layer'], function(){
+  var $ = layui.jquery
+  ,upload = layui.upload
+  ,element = layui.element
+  ,layer = layui.layer;
+  
+  //常规使用 - 普通图片上传
+  var uploadInst1 = upload.render({
+    elem: '#logo_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#logo_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="logo"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传2
+  var uploadInst2 = upload.render({
+    elem: '#erweima_one_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#erweima_one_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="erweima_one"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传3
+  var uploadInst3 = upload.render({
+    elem: '#erweima_two_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#erweima_two_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="erweima_two"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+   //常规使用 - 普通图片上传4
+  var uploadInst4 = upload.render({
+    elem: '#footlogo_btn'
+    ,url: '{:url("uploadImg")}' //改成您自己的上传接口
+    ,before: function(obj){
+      //预读本地文件示例，不支持ie8
+      obj.preview(function(index, file, result){
+        $('#footlogo_img').attr('src', result); //图片链接（base64）
+      });
+      
+      element.progress('demo', '0%'); //进度条复位
+      layer.msg('上传中', {icon: 16, time: 0});
+    }
+    ,done: function(res){
+      //如果上传失败
+      if(res.code > 0){
+        return layer.msg('上传失败');
+      }
+      //上传成功的一些操作
+      //……
+	  $('input[name="footlogo"]').val(res.data);
+       return layer.msg('上传成功');
+    }  
+  });
+  
+});
+</script>
+
+
+
+{/block}

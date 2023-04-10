@@ -1,0 +1,504 @@
+<!doctype html>
+<html clsss="site-demo-overflow">
+<head>
+<meta charset="utf-8">
+<title>{$Think.config.sys_name}</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="/static/plugins/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="/static/plugins/fontawesome4.7.0/css/font-awesome.min.css" media="all" />
+<link rel="stylesheet" href="/static/css/backend/global.css" media="all">
+<link rel="stylesheet" href="/static/css/backend/font.css" media="all">
+<link rel="stylesheet" href="/static/plugins/layui/css/style.css" media="all" />
+<style type="text/css">
+.main {
+    background: #FFF;
+    padding: 15px;
+    min-height: 600px;
+}
+h4 {
+    font-size: 18px;
+    color: inherit;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+}
+a.o-btn-blue:link, a.o-btn-blue:visited {
+    color: #fff;
+}
+.o-fr {
+    float: right !important;
+}
+.o-btn {
+    padding: 5px 15px;
+    font-size: 13px;
+}
+.o-btn-blue {
+    background-color: #00a7e7;
+    border-color: #00a7e7;
+}
+.o-mt-20 {
+    margin-top: 20px;
+}
+.o-form {
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+input {
+    line-height: normal;
+}
+.o-form-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.o-form-horizontal .o-form-label {
+    padding-right: 10px;
+    text-align: right;
+}
+.o-text-default {
+    font-size: 14px;
+}
+.o-grid-4 {
+    width: 33.33333333%;
+    text-align: right;
+}
+[class*="o-grid-"] {
+    float: left;
+    padding-left: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+}
+label {
+    display: inline-block;
+    font-weight: bold;
+}
+.o-grid-8 {
+    width: 66.66666667%;
+}
+.o-input-right-p {
+    font-size: 14px;
+}
+.o-ml {
+    margin-left: 10px;
+}
+.o-grid-3 {
+    width: 25%;
+}
+.o-form select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-size: 14px;
+    color: #555555;
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    border-radius: 0;
+}
+.o-grid-offset-4 {
+    margin-left: 33.33333333%;
+}
+.o-btn-size-16 {
+    font-size: 16px;
+    line-height: 1.3;
+}
+.o-btn-size-block {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    display: block;
+}
+.mrt {
+    margin-top: 10px;
+}
+.o-btns {
+    padding: 11px 20px;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-image: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    outline: 0;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: background-color 300ms ease-out, border-color 300ms ease-out;
+    transition: background-color 300ms ease-out, border-color 300ms ease-out;
+}
+.o-radius, .o-radius-2 {
+    border-radius: 2px;
+}
+.o-on-txt {
+    color: #fff;
+}
+.layui-input-block {
+    margin-left: 0px;
+    width: 300px;
+}
+.layui-form-item {
+    margin-left: 26.5%;
+}
+.layui-form-label {
+    font-weight: bold;
+}
+.application_list_val a {
+    color: #00a7e7;
+}
+	.works-detail-wrap .layui-col-md6 {margin-bottom:15px; overflow: hidden;border-bottom: 1px solid #F2F2F2; padding-bottom: 5px; line-height: 35px;}
+.works-detail-wrap  .application_list_title {
+    float: left;
+    width: 38%;
+    text-align: right;
+    font-weight: 500;
+    color: #666;
+}
+.works-detail-wrap  .application_list_title span {
+    padding-right: 10px;
+    font-size: 16px;
+}
+.works-detail-wrap  .application_list_val {
+    float: left;
+    width: 60%;
+    text-align: left;
+}
+	.line36 {line-height:36px;}
+	.msubmit { margin-left: 32.5%;}
+	
+@media screen and (max-width: 768px) {
+
+	.layui-form-item {
+    margin-left: 24%;
+}	
+	
+	}
+@media screen and (max-width: 767px) {
+.layui-form-item {
+    margin-left: 0;
+}
+.works-detail-wrap .application_list_title span {
+    font-size: 14px;
+}	
+	.works-detail-wrap .layui-col-md6 {line-height:25px;}
+	
+}
+	
+</style>
+</head>
+<body>
+<div class="main">
+  <h4>作品详情</h4>
+  <div class="form-content o-mt-20">
+    <form class="layui-form" lay-filter="frmPingfen" action="">
+		<input type="hidden" name="id" value="{$Think.get.gid}">
+		<input type="hidden" name="adminid" value="{$Think.cookie.aid}">
+		<input type="hidden" name="work_id" value="{$data['id']}">
+		{:token()}
+      <div class="o-form-group">
+        <div class="works-detail-wrap">
+			
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>申报编号</span></div>
+            <div class="application_list_val"><span>{$data.workcode}（{$data.city}）</span></div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>作品名称</span></div>
+            <div class="application_list_val"><span>{$data.title}</span></div>
+          </div>
+     
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>相关材料</span></div>
+            <div class="application_list_val"><span><a href="{$data['relevant_data']}" target="_blank">点击下载查看相关材料</a></span></div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>版权登记</span></div>
+            <div class="application_list_val"> 
+			  {eq name="data.copyright" value="0"} <span>是</span> {/eq}
+              {eq name="data.copyright" value="1"} <span>否</span> {/eq}
+			</div>
+          </div>
+         <div class="layui-col-md6">
+            <div class="application_list_title"><span>申请专利</span></div>
+            <div class="application_list_val">
+			  {eq name="data.patent" value="0"} <span>是</span> {/eq}
+              {eq name="data.patent" value="1"} <span>否</span> {/eq}
+			</div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>所有权</span></div>
+            <div class="application_list_val">
+			  {eq name="data.proprietary_rights" value="0"}
+                <span style=" padding-right:12px; ">单位</span>
+              {/eq}
+              {eq name="data.proprietary_rights" value="1"}
+                <span style=" padding-right:12px; ">个人</span>
+              {/eq}
+			</div>
+          </div>
+          <div class="layui-col-md12">
+            <div class="layui-col-md6">
+				 <div class="application_list_title"><span>作品说明</span></div>
+				<div class="application_list_val"> 
+				{empty name="data.works_description"}
+					<span style=" color:#CCC; ">暂无</span>
+					{else /}
+					{$data.works_description|htmlspecialchars_decode}
+				{/empty}
+				</div>
+			  </div> 
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>主视图</span></div>
+            <div class="application_list_val"> 
+			
+			{empty name="data['work_pic1']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="work_pic1"><img src="{$data['work_pic1']|get_thumb}" height="30" /></a>
+			{/empty}
+			</div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>左视图</span></div>
+            <div class="application_list_val">
+			
+			{empty name="data['work_pic2']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="work_pic2"><img src="{$data['work_pic2']|get_thumb}" height="30" /></a>
+			{/empty}
+
+			</div>
+          </div>
+         <div class="layui-col-md6">
+            <div class="application_list_title"><span>俯视图</span></div>
+            <div class="application_list_val"> 			
+			{empty name="data['work_pic3']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="work_pic3"><img src="{$data['work_pic3']|get_thumb}" height="30" /></a>
+			{/empty}
+			</div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>后视图</span></div>
+            <div class="application_list_val"> 
+			{empty name="data['work_pic4']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="work_pic4"><img src="{$data['work_pic4']|get_thumb}" height="30" /></a>
+			{/empty}
+			</div>
+          </div>
+         <div class="layui-col-md6">
+            <div class="application_list_title"><span>右视图</span></div>
+            <div class="application_list_val"> 
+			{empty name="data['work_pic5']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="work_pic5"><img src="{$data['work_pic5']|get_thumb}" height="30" /></a>
+			{/empty}
+			</div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>仰视图</span></div>
+            <div class="application_list_val"> 			
+			{empty name="data['work_pic6']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="work_pic6"><img src="{$data['work_pic6']|get_thumb}" height="30" /></a>
+			{/empty}
+			</div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>轴测图</span></div>
+            <div class="application_list_val"> 
+			{empty name="data['work_pic7']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="work_pic7"><img src="{$data['work_pic7']|get_thumb}" height="30" /></a>
+			{/empty}
+			</div>
+          </div>
+          <div class="layui-col-md6">
+            <div class="application_list_title"><span>展版图</span></div>
+            <div class="application_list_val"> 			
+			{empty name="data['layout_pic']"}
+				<span style=" color:#CCC; ">暂无</span>
+				{else /}
+				<a id="layout_pic"><img src="{$data['layout_pic']|get_thumb}" height="30" /></a>
+			{/empty}
+			</div>
+          </div>
+			<div class="layui-col-md6">
+            <div class="application_list_title"><span>申报组别</span></div>
+            <div class="application_list_val"> {$data['declaration_group']} </div>
+          </div>
+			
+        </div>
+      </div>
+		<div class="works-detail-wrap">
+			<div class=" layui-col-md12">
+			<div class="layui-col-md6" style="border-bottom: none;">
+				<div class="application_list_title"><span>申报组别</span></div>
+				<div class="application_list_val"> {$data['declaration_group']} </div>
+			  </div>
+			</div>
+			<div class=" layui-col-md12">
+			<div class="layui-col-md6" style="border-bottom: none;">
+				<div class="application_list_title"><span>作品分数</span></div>
+				<div class="application_list_val"> <input type="text" name="totalscore" lay-verify="required|number" placeholder="请输入您的打分（满分100）" autocomplete="off" class="layui-input layui-form-danger"> </div>
+			  </div>
+			</div>
+			
+			<div class=" layui-col-md12">
+			<div class="layui-col-md6" style="border-bottom: none;">
+				<div class="application_list_title"><span>&nbsp;</span></div>
+				<div class="application_list_val">  <button class="layui-btn" lay-submit="" lay-filter="formGrade" id="btnSmtPingfen">提交评分</button> </div>
+			  </div>
+			</div>
+			
+		</div>		
+    </form>
+  </div>
+</div>
+<script src="/static/js/jquery-1.11.0.min.js"></script>
+<script src="/static/plugins/layui/layui.all.js"></script> 
+<script src="/static/js/backend/index.js"></script> 
+<script src="/static/js/tab.js"></script>
+
+<script>
+var p_pingfenResult = {$pingfenResult|raw};
+
+
+ layui.use(['layer','form'],function () {
+	var layer = layui.layer,form = layui.form;
+	if(p_pingfenResult) {
+		form.render('select');
+		form.val('frmPingfen',p_pingfenResult);
+	}
+	//专家提交打分
+		form.on('submit(formGrade)', function(data){
+			$('#btnSmtPingfen').attr('disabled',true);
+
+			if(isNaN(data.field.totalscore) || parseInt(data.field.totalscore)>100) {
+				layer.msg('请输入正确的评分');
+				$('input[name="totalscore"]').focus();
+				return false;
+			}
+		  $.post('/sysman/works/esaveGrade',{data:data.field}, function(res) {
+			if (res.code === 1) {
+			  layer.msg(res.msg,{time:1000,icon:1},function(){
+						self.location.href = res.url
+					});
+			} else {
+					layer.msg('打分失败',{time:1000,icon:2});
+					$('#btnSmtPingfen').removeAttr('disabled');
+			}
+		  });
+		  return false;
+		});
+ })
+
+//刷新页面
+$("#refresh").click(function() {
+  window.location.reload()
+});
+</script>
+
+<script>
+$(function () {
+
+	$('#work_pic1 img').on('click', function () {
+        layer.photos({
+            photos: '#work_pic1',
+			shade: [0.8, '#393D49'],
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+	
+	$('#work_pic2 img').on('click', function () {
+        layer.photos({
+            photos: '#work_pic2',
+			shade: [0.8, '#393D49'],
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+	
+	$('#work_pic3 img').on('click', function () {
+        layer.photos({
+            photos: '#work_pic3',
+			shade: [0.8, '#393D49'],
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+	
+	$('#work_pic4 img').on('click', function () {
+        layer.photos({
+            photos: '#work_pic4',
+			shade: [0.8, '#393D49'],
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+	
+	$('#work_pic5 img').on('click', function () {
+        layer.photos({
+            photos: '#work_pic5',
+			shade: [0.8, '#393D49'],
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+	
+	$('#work_pic6 img').on('click', function () {
+        layer.photos({
+            photos: '#work_pic6',
+			shade: [0.8, '#393D49'],
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+	$('#work_pic7 img').on('click', function () {
+        layer.photos({
+            photos: '#work_pic7',
+			shade: [0.8, '#393D49'],
+            shadeClose: false,
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+    $('#layout_pic img').on('click', function () {
+        layer.photos({
+            photos: '#layout_pic',
+            shadeClose: false,
+			shade: [0.8, '#393D49'],
+            closeBtn: 2,
+            anim: 0
+        });
+    })
+});
+</script>
+
+</body>
+</html>

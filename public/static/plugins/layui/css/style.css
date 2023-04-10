@@ -1,0 +1,132 @@
+/*登陆表单样式 start*/
+.zyl_login_cont{width: 100%; height: 100%;  text-align: center;}
+.zyl_login_cont .img {margin:0 auto;}
+.wrap{
+    width: 100%;
+    height: 100%;
+	background-color: #EDEDED;
+	left: 0; top: 0;
+	position: fixed;
+}
+.loginForm{
+    background-color: rgba(255,255,255,0.8);
+    width: 100%;
+	max-width: 400px;
+	padding:  15px;
+	margin: 0 auto;
+    height: 400px;
+    z-index: 9999;
+    position: fixed;
+	left: 50%;
+	top: 50%;
+	
+	transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform:  translateX(-50%) translateY(-50%);
+    -ms-transform:  translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);}
+.usernameDiv{
+    width: 300px;
+    height: 40px;
+    padding-left: 130px;
+    padding-top: 30px;
+
+}
+.adminInput{
+    width: 200px;
+    height: 40px;
+    font-size: 15px;
+    border-radius:5px;
+	border: none;
+    /*margin-left: auto;*/
+    /*border: 1px solid #cccccc;*/
+}
+.passwordDiv{
+    width: 300px;
+    height: 40px;
+    padding-left: 130px;
+    padding-top: 28px;
+}
+.cardDiv{
+    width: 120px;
+    height: 40px;
+    padding-top: 28px;
+    padding-left: 14px;
+    float: left;
+}
+.cardInput{
+    width: 124px;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 0.5em 0em 0em 0.5em;
+}
+.codeDiv{
+    width: 100px;
+    height: 40px;
+    padding-top: 28px;
+    padding-right: 20px;
+    float: left;
+}
+.codeInput{
+    width: 80px;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 0em 0.5em 0.5em 0em;
+    /*验证码样式*/
+    font-family: Arial;
+    font-style: italic;
+    font-weight: bold;
+    /*border: 0;*/
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+.usernameWrapDiv i{
+    position: absolute;
+}
+.adminIcon{
+    font-size: 22px;
+    margin-top: 8px;
+    margin-left: 165px;
+}
+.logoHead{
+    width: 100%;
+    height: 60px;
+	text-align: center;
+    padding-top: 25px;
+}
+.usernameLabel{
+    width: 60px;
+    height: 30px;
+    font-size: 16px;
+    float: left;
+    margin-left: 55px;
+    margin-top: 40px;
+}
+.submitLabel{
+    width: 160px;
+    height: 30px;
+    font-size: 13px;
+    float: left;
+    margin-left: 55px;
+    margin-top: 40px;
+    cursor: pointer;
+}
+.usernameWrapDiv{
+    width:100%;
+	margin-bottom: 15px;
+}
+.submitDiv{
+    width: 100%;
+    height: 40px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+.loginForm .submit{
+    width: 100px;
+    height: 40px;
+    border-radius: 0.5em;
+}
+.imgStyle{
+    width: 100%;
+    height: 100%;
+}

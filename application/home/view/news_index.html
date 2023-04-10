@@ -1,0 +1,44 @@
+{extend name="base"}
+{block name="style"}
+<style>
+.news{width: 880px;  margin: 0 auto;margin-top: 70px;  min-height: 400px;}
+.news h1{font-size: 24px;
+font-weight: bold;
+color: #333333;margin-bottom: 18px;}
+.news hr{background-color: #EEEEEE;height: 2px;}
+.news ul{margin-top: 35px;}
+.news ul li{font-size: 14px;color: #636363;margin-bottom: 16px;padding-bottom: 20px;
+border-bottom: 1px solid #EEEEEE;}
+.news ul li a:hover{color:#ff3e3e;font-weight: 500!important;}
+.news ul li .icon{width: 4px;
+height: 4px;float: left;
+background: #333333;
+opacity: 1;margin-right: 14px;
+margin-top: 10px;
+border-radius: 10px;}
+.news ul li .title{width: 750px;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 16px;
+color: #333333;}
+.news ul li .date {font-size: 16px;
+display: inline-block;
+float: right;
+color: #AAAAAA;}
+</style>
+{/block}
+{block name="body"}
+<div class="news">
+  <h1>大赛动态</h1>
+  <hr>
+  <ul>
+    {volist name="list" id="vo"}
+    <li>
+      <div class="icon"></div>
+      <a href="/view?id={$vo.id}" class="title">{$vo.title|strip_tags}</a>
+      <span class="date">{$vo.create_time|date="Y-m-d"}</span>
+    </li>
+    {/volist}
+    {$list->render()|raw}
+  </ul>
+</div>
+
+{/block}
+

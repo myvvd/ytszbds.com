@@ -1,0 +1,77 @@
+{extend name="base"/}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit">
+  <form class="layui-form layui-form-pane" lay-filter="form">
+    <input type="hidden" name="id">
+    <div class="layui-form-item">
+      <label class="layui-form-label">登录帐号</label>
+      <div class="layui-input-4"><input type="text" name="username" class="layui-input"></div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">登录密码</label>
+      <div class="layui-input-4"><input type="text" name="password" class="layui-input" placeholder="留空则不修改密码"></div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">专家所属组</label>
+      <div class="layui-input-4">
+        <select name="expert_group_id" lay-verify="required" id='expert_group_id'></select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">角色</label>
+      <div class="layui-input-4">
+        <select name="rolecode" lay-verify="required">
+          <option value="">请选择用户组</option>
+          <option value="admin">主管理员</option>
+          <option value="specialist">初评专家</option>
+          <option value="cityadmin">市级管理员</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">提交保存</button>
+        <button type="button" class="layui-btn layui-btn-normal" onclick="closeTab()">关闭</button>
+      </div>
+    </div>
+  </form>
+</div>
+{/block}
+{block name="script"}
+<script>
+var info = {$info|raw};
+form.on('submit(submit)', function (data) {
+  loading =layer.load(1, {shade: [0.1,'#fff']});
+  $.post('', data.field, function (res) {
+      layer.close(loading);
+      if (res.code > 0) {
+          layer.msg('保存成功', {time: 1800, icon: 1}, closeTab);
+      } else {
+          layer.msg('保存失败，请检查输入是否正确或稍后再试', {time: 1800, icon: 2});
+      }
+  });
+});
+
+function closeTab() {
+  parent.tab.deleteTab(parent.tab.getCurrentTabId());
+}
+
+//页面加载完执行
+$(document).ready(function () {
+  //获取所有专家组
+  $.ajaxSettings.async = false;
+  $.get('/sysman/adminuser/getGroupList', function (res) {
+    var str = '<option value="">请选择专家所属组</option>';
+      $.each(res, function (index, item) {
+        str +=`<option value="${item.id}">${item.name}</option>`;
+      });
+      $('#expert_group_id').html(str);
+      form.render('select');
+  });
+  $.ajaxSettings.async = true;
+  form.val('form', info);
+  form.render();
+});
+
+</script>
+{/block}

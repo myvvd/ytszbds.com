@@ -1,0 +1,25 @@
+<div class="nav">
+  <ul>
+    <?php $k = 1;?>
+    {volist name="cate" id="vo"}
+    {if $k<4}
+    <li><a href="/{$vo.ftitle}">{$vo.title}</a></li>
+    {/if}
+    <?php $k++;?>
+    {/volist}
+	<li><a target="_blank" href="http://www.sdgcup-id.com/enroll">省长杯申报</a></li>
+	
+  </ul>
+</div>
+<div class="usercenter">
+  <ul>
+    {if $Think.cookie.uid != null }
+    <li style="min-width: 60px;"><a href="/ucenter">账户中心</a></li>
+    <li style="min-width: 30px;"><a href="/logout">退出</a></li>
+    {else /}
+    <li style="min-width: 30px;"><a href="/login">登录</a></li>
+    <li style="min-width: 30px;"><a href="/reg">注册</a></li>
+    {/if}
+    <li><img src="/static/images/web/my.png" alt="账户中心"></li>
+  </ul>
+</div>

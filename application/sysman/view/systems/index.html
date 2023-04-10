@@ -1,0 +1,58 @@
+{extend name="base"/}
+{block name="style"}
+<style>
+#page-expertgroup-edit .layui-form-item .layui-form-label{padding-left: 2px;padding-right: 0;width: 120px;}
+#page-expertgroup-edit .layui-form-item .checkboxs-box{width: 840px;}
+</style>
+{/block}
+{block name="body"}
+<div class="admin-main layui-anim layui-anim-upbit" id="page-expertgroup-edit">
+  <form class="layui-form layui-form-pane" lay-filter="form">
+    <input type="hidden" name="id">  
+	<div class="layui-form-item">
+		<label class="layui-form-label">是否开启复评</label>
+		 <div class="layui-input-block">
+		  <input type="radio" name="is_open" value="0" title="关闭" checked="">
+		  <input type="radio" name="is_open" value="1" title="开启">
+		</div>
+	</div>
+	
+	<div class="layui-form-item">
+		<label class="layui-form-label">生成申报书</label>
+		 <div class="layui-input-block">
+		  <input type="radio" name="is_pdf" value="0" title="关闭" checked="">
+		  <input type="radio" name="is_pdf" value="1" title="开启">
+		</div>
+	</div>
+	
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button type="button" class="layui-btn" lay-submit="" lay-filter="submit">提交保存</button>
+        <button type="button" class="layui-btn layui-btn-normal" onclick="closeTab()">关闭</button>
+      </div>
+    </div>
+  </form>
+</div>
+{/block}
+{block name="script"}
+<script>
+var info =JSON.parse('{$info|raw}');
+form.val('form', info);
+form.render();
+form.on('submit(submit)', function (data) {
+  loading =layer.load(1, {shade: [0.1,'#fff']});
+  $.post('{:url("save")}', data.field, function (res) {
+      layer.close(loading);
+      if (res.code > 0) {
+          layer.msg('保存成功', {time: 1800, icon: 1}, closeTab);
+      } else {
+          layer.msg('保存失败，请检查输入是否正确或稍后再试', {time: 1800, icon: 2});
+      }
+  });
+});
+
+function closeTab() {
+  parent.tab.deleteTab(parent.tab.getCurrentTabId());
+}
+</script>
+{/block}

@@ -1,0 +1,206 @@
+{extend name="base"}
+
+{block name="style"}
+
+<style>
+
+  h1{font-size: 29px;color: #060500;text-align: center;font-weight: bold;}
+
+  h2{font-size: 20px;color: #9fa0a0;text-align: center;}
+
+  .contest-intro{margin-top: 50px;}
+
+  .intro-box{font-size: 16px;color: #221815;line-height: 30px;font-weight: 550;margin: 36px 215px 78px 215px;}
+
+  .intro-box p{text-indent:2em}
+
+  .schedule-img-box{background:url(/static/images/web/zuopinzhengji.jpg);height: 172px;width:942px;position: relative;margin: 45px 219px 82px 219px;}
+
+  .schedule-img-box span{font-size: 13px;color: #fff;}
+
+  .schedule-img-box span:first-child{position: absolute;top: 149px;left: 73px;}
+
+  .schedule-img-box span:nth-child(2){position: absolute;top: 149px;left: 298px;}
+
+  .schedule-img-box span:nth-child(3){position: absolute;top: 149px;left: 527px;}
+
+  .schedule-img-box span:nth-child(4){position: absolute;top: 149px;left: 788px;}
+
+  .category-box{display: flex;align-items: flex-start;flex-wrap:wrap;margin: 40px 219px 93px 214px;}
+
+  .category-box div{width: 32.8%;height: 41px;border-radius: 10.63px;background: #c0011a; font-size: 16px;color: #fff;display: flex;justify-content: center;align-items: center;margin: 5px 0px 0px 5px;}
+
+  .procedure-box{background:url(/static/images/web/procedure.jpg);height: 257px;width: 944px;margin: 45px 219px 88px 219px;}
+
+  .criteria-box{background:url(/static/images/web/index_psbz_text.jpg);height: 444px;width: 946px;margin: 45px 219px 88px 219px;position: relative;}
+
+  .prizes-box{margin: 45px 215px 82px 205px;position: relative;}
+
+  .prizes-box img{padding-left: 5px;}
+
+  .prizes-box span:nth-child(6){position: absolute;top: 95px;left: 79px;font-size: 16px;color: #fff;letter-spacing:2px;}
+
+  .prizes-box span:nth-child(7){position: absolute;top: 118px;left: 82px;font-size: 13px;color: #fff;}
+
+  .prizes-box span:nth-child(8){position: absolute;top: 145px;left: 13px;font-size: 12px;color: #fff;}
+
+  .prizes-box span:nth-child(9){position: absolute;top: 95px;left: 270px;font-size: 16px;color: #fff;letter-spacing:2px;}
+
+  .prizes-box span:nth-child(10){position: absolute;top: 118px;left: 273px;font-size: 13px;color: #fff;}
+
+  .prizes-box span:nth-child(11){position: absolute;top: 95px;left: 460px;font-size: 16px;color: #fff;letter-spacing:2px;}
+
+  .prizes-box span:nth-child(12){position: absolute;top: 118px;left: 463px;font-size: 13px;color: #fff;}
+
+  .prizes-box span:nth-child(13){position: absolute;top: 95px;left: 643px;font-size: 16px;color: #fff;letter-spacing:2px;}
+
+  .prizes-box span:nth-child(14){position: absolute;top: 118px;left: 657px;font-size: 13px;color: #fff;}
+
+  .prizes-box span:nth-child(15){position: absolute;top: 145px;left: 605px;font-size: 12px;color: #fff;}
+
+  .prizes-box span:nth-child(16){position: absolute;top: 95px;left: 815px;font-size: 16px;color: #fff;letter-spacing:2px;}
+
+  .prizes-box span:nth-child(17){position: absolute;top: 118px;left: 832px;font-size: 13px;color: #fff;}
+
+  .prizes-box span:nth-child(18){position: absolute;top: 145px;left: 778px;font-size: 12px;color: #fff;}
+
+</style>
+
+{/block}
+
+{block name="body"}
+
+<div class="contest-intro">
+
+  {volist name="listcate" id="v"}
+
+  {if $v['ftitle'] == 'dsjj' && $v['cateid'] == '1'}
+
+    <h1 class="mgb">{$v['title']}</h1>
+
+    <h2>{$v['eng']}</h2>
+
+    <div class="intro-box">
+
+        {$v['content']|raw}
+
+    </div>
+
+  {/if}
+
+  {/volist}
+
+</div>
+
+<div class="contest-schedule">
+
+  {volist name="listcate" id="v"}
+
+  {if $v['ftitle'] == 'dsrc' && $v['cateid'] == '1'}
+
+  <h1 class="mgb">{$v['title']}</h1>
+
+  <h2>{$v['eng']}</h2>
+
+  <div class="schedule-img-box">
+
+      {$v['content']|raw}
+
+    <span></span>
+
+  </div>
+
+  {/if}
+
+  {/volist}
+
+</div>
+
+<div class="declaration-category">
+
+  {volist name="cate" id="v"}
+
+    {if $v['ftitle'] == 'GATEGORY'}
+
+  <h1 class="mgb">{$v['title']}</h1>
+
+  <h2>{$v['ftitle']}</h2>
+
+  {/if}
+
+  {/volist}
+
+  <div class="category-box">
+
+    {volist name="listcate" id="v"}
+
+    {if $v['cateid'] == '9'}
+
+    <div>{$v.title}</div>
+
+    {/if}
+
+    {/volist}
+
+  </div>
+
+</div>
+
+{volist name="listcate" id="v"}
+
+<div class="declaration-procedure">
+
+  {if $v['cateid'] == 1 && $v['ftitle'] == 'sblc'}
+
+  <h1 class="mgb">{$v['title']}</h1>
+
+  <h2>{$v['eng']}</h2>
+
+  <div class="procedure-box" style="background: url({$v['pic']});">
+
+  </div>
+
+  {/if}
+
+</div>
+
+{/volist}
+
+{volist name="listcate" id="v"}
+
+<div class="evaluation-criteria">
+
+  {if $v['cateid'] == 1 && $v['ftitle'] == 'psbz'}
+
+  <h1 class="mgb">{$v['title']}</h1>
+
+  <h2>{$v['eng']}</h2>
+
+  <div class="criteria-box" style="background: url({$v['pic']});"></div>
+
+  {/if}
+
+</div>
+
+{/volist}
+
+{volist name="listcate" id="v"}
+
+<div class="prizes-set-up">
+
+  {if $v['cateid'] == 1 && $v['ftitle'] == 'jxzz'}
+
+  <h1 class="mgb">{$v['title']}</h1>
+
+  <h2>{$v['eng']}</h2>
+
+  {$v.content|raw}
+
+  {/if}
+
+</div>
+
+{/volist}
+
+{/block}
+
