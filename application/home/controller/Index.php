@@ -13,9 +13,10 @@ class Index extends HomeBase
   	$cate = Db::name('category')
             ->order('sort ASC')
             ->field('id,title,create_time,ftitle')
+        ->where('status',1)
             ->select();
             
-    // var_dump($cate);die;
+//     var_dump($cate);die;
     $this->assign('cate', $cate);
 
     $listcate = Db::name('cate')
@@ -23,7 +24,7 @@ class Index extends HomeBase
             ->order('sort ASC')
             ->select();
             
-    // var_dump($cate);die;
+//     dump($listcate);die;
     $this->assign('listcate', $listcate);
     return $this->fetch();
   }
