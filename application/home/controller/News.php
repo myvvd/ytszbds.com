@@ -15,6 +15,7 @@ class News extends HomeBase
     $cate = Db::name('category')
             ->order('sort ASC')
             ->field('id,title,create_time,ftitle')
+        ->where('status','1')
             ->select();
 
     $this->assign('cate', $cate); 
@@ -30,6 +31,7 @@ class News extends HomeBase
     foreach ($list as &$item) {
       $item['title'] = strip_tags($item['title'],'');
     }
+//    dump($list);die;
     $this->assign('list', $list);
 
     return $this->fetch('index');

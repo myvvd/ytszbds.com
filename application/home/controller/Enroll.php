@@ -25,6 +25,7 @@ class Enroll extends HomeBase
         $cate = Db::name('category')
           ->order('sort ASC')
           ->field('id,title,create_time,ftitle')
+            ->where('status','1')
           ->select();
         // var_dump($cate);die;
         $this->assign('cate', $cate);
@@ -114,7 +115,7 @@ class Enroll extends HomeBase
 		$age = date('Y') - substr($data['creator_idcard'], 6, 4);
 		$data['age'] = $age<0||$age >110?'':$age;
 		
-        if (isset(($data['id'])) && !empty($data['id'])) {
+        if (($data['id']) !== null && !empty($data['id'])) {
             //unset($data['uid']);
             $submitto = $model->where('id', $data['id'])->field('submitto,checkstatus1')->find()->getData();
             if ($submitto['submitto'] == 1) {

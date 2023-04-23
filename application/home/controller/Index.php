@@ -16,7 +16,7 @@ class Index extends HomeBase
         ->where('status',1)
             ->select();
             
-//     var_dump($cate);die;
+//     dump($cate);die;
     $this->assign('cate', $cate);
 
     $listcate = Db::name('cate')

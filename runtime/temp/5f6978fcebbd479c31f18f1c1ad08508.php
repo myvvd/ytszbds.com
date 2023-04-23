@@ -1,4 +1,4 @@
-<?php /*a:5:{s:65:"/Users/xingyoulin/www/szb/application/home/view/enroll_index.html";i:1649741300;s:59:"/Users/xingyoulin/www/szb/application/home/view/bgbase.html";i:1649741300;s:57:"/Users/xingyoulin/www/szb/application/home/view/head.html";i:1649741300;s:61:"/Users/xingyoulin/www/szb/application/home/view/head-nav.html";i:1649741300;s:59:"/Users/xingyoulin/www/szb/application/home/view/footer.html";i:1649741300;}*/ ?>
+<?php /*a:5:{s:73:"/Users/xingyoulin/www/ytszbds.com/application/home/view/enroll_index.html";i:1649741300;s:67:"/Users/xingyoulin/www/ytszbds.com/application/home/view/bgbase.html";i:1682211104;s:65:"/Users/xingyoulin/www/ytszbds.com/application/home/view/head.html";i:1649741300;s:69:"/Users/xingyoulin/www/ytszbds.com/application/home/view/head-nav.html";i:1682229520;s:67:"/Users/xingyoulin/www/ytszbds.com/application/home/view/footer.html";i:1682216409;}*/ ?>
 <!DOCTYPE html><html lang="zh-cn"><head>
   <title><?php echo htmlentities($webset['name']); ?></title>
 <!-- <title><?php echo htmlentities(app('config')->get('sys_name')); ?></title> -->
@@ -87,16 +87,16 @@ var _hmt = _hmt || [];
 <div class="header">
   <div class="header-box">
   	<?php if(is_array($listcate) || $listcate instanceof \think\Collection || $listcate instanceof \think\Paginator): $i = 0; $__LIST__ = $listcate;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;if($v['ftitle'] == 'wlogo' && $v['cateid'] == 11): ?>
-    <div class="logo-box"><img width="277" src="/static/images/logo.svg" alt="<?php echo htmlentities(app('config')->get('sys_name')); ?>"></div>
+    <div class="logo-box"><img width="277" src="/static/images/logo2.jpg" alt="<?php echo htmlentities(app('config')->get('sys_name')); ?>"></div>
     <?php endif; ?>
     <?php endforeach; endif; else: echo "" ;endif; ?>
     <div class="nav">
   <ul>
-    <?php $k = 1;if(is_array($cate) || $cate instanceof \think\Collection || $cate instanceof \think\Paginator): $i = 0; $__LIST__ = $cate;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($k<4): ?>
+    <?php $k = 1;if(is_array($cate) || $cate instanceof \think\Collection || $cate instanceof \think\Paginator): $i = 0; $__LIST__ = $cate;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($k<3): ?>
     <li><a href="/<?php echo htmlentities($vo['ftitle']); ?>"><?php echo htmlentities($vo['title']); ?></a></li>
     <?php endif; $k++;?>
     <?php endforeach; endif; else: echo "" ;endif; ?>
-	<li><a target="_blank" href="http://www.sdgcup-id.com/enroll">省长杯申报</a></li>
+<!--	<li><a target="_blank" href="http://www.sdgcup-id.com/enroll">省长杯申报</a></li>-->
 	
   </ul>
 </div>
@@ -452,7 +452,7 @@ var _hmt = _hmt || [];
      -->
      <div class="footer">
   <div class="mfoot_l">
-    <div class="mfoot_logo"><img src="/static/images/footlogo.svg" alt="" width="179"></div>
+    <div class="mfoot_logo"><img src="/static/images/logo3.jpg" alt="" width="179"></div>
     <div class="mfoot_img"><img  src="<?php echo htmlentities($webset['erweima_one']); ?>" width="80" height="80"><!--<img  src="<?php echo htmlentities($webset['erweima_two']); ?>" width="80" height="80">--></div>
 	<br/>
 	 <p class="beian" style="text-align:center;"><a style="color:#FFFFFF" href="https://beian.miit.gov.cn/" target="_blank"><?php echo htmlentities($webset['beian']); ?></a></p>
@@ -463,22 +463,24 @@ var _hmt = _hmt || [];
           <strong>主办单位：</strong>
           <span><?php echo htmlentities($webset['host']); ?></span>
         </div>
-        <div class="right">
-          <strong>支持单位：</strong>
-          <span><?php echo htmlentities($webset['support']); ?></span>
-        </div>
+<!--        <div class="right">-->
+<!--          <strong>支持单位：</strong>-->
+<!--          <span><?php echo htmlentities($webset['support']); ?></span>-->
+<!--        </div>-->
         <div class="clear"></div>
       </div>
       <div class="mfoot_m_cont m_two">
         <div class="left">
-          <strong>承办单位：</strong>
-          <div class="mfoot_list">
-		  <?php if(is_array($webset['undertake']) || $webset['undertake'] instanceof \think\Collection || $webset['undertake'] instanceof \think\Paginator): if( count($webset['undertake'])==0 ) : echo "" ;else: foreach($webset['undertake'] as $key=>$vo): if($key%2==0): ?>
-          <span style="display:block;"><?php echo htmlentities($vo); ?></span>
-		  <?php endif; ?>
-		  <?php endforeach; endif; else: echo "" ;endif; ?>
-          
-          </div>
+          <strong>支持单位：</strong>
+<!--          <div class="mfoot_list">-->
+<!--		  <?php if(is_array($webset['undertake']) || $webset['undertake'] instanceof \think\Collection || $webset['undertake'] instanceof \think\Paginator): if( count($webset['undertake'])==0 ) : echo "" ;else: foreach($webset['undertake'] as $key=>$vo): ?>-->
+<!--		  <?php if($key%2==0): ?>-->
+<!--          <span style="display:block;"><?php echo htmlentities($vo); ?></span>-->
+<!--		  <?php endif; ?>-->
+<!--		  <?php endforeach; endif; else: echo "" ;endif; ?>-->
+
+<!--          </div>-->
+            <span><?php echo htmlentities($webset['support']); ?></span>
         </div>
         <div class="right">
 		 <?php if(is_array($webset['undertake']) || $webset['undertake'] instanceof \think\Collection || $webset['undertake'] instanceof \think\Paginator): if( count($webset['undertake'])==0 ) : echo "" ;else: foreach($webset['undertake'] as $key=>$vo): if($key%2==1): ?>
@@ -490,19 +492,33 @@ var _hmt = _hmt || [];
         <div class="clear"></div>
       </div>
       <div class="mfoot_m_cont">
-        <div class="left">
-          <strong>协办单位：</strong>
-		   <?php if(is_array($webset['xieban']) || $webset['xieban'] instanceof \think\Collection || $webset['xieban'] instanceof \think\Paginator): if( count($webset['xieban'])==0 ) : echo "" ;else: foreach($webset['xieban'] as $key=>$vo): if($key==0): ?>
-          <span>各市工业和信息化局</span>
-		  <?php endif; ?>
-		    <?php endforeach; endif; else: echo "" ;endif; ?>
-        </div>
-        <div class="right">
-		 <?php if(is_array($webset['xieban']) || $webset['xieban'] instanceof \think\Collection || $webset['xieban'] instanceof \think\Paginator): if( count($webset['xieban'])==0 ) : echo "" ;else: foreach($webset['xieban'] as $key=>$vo): if($key>0): ?>
-          <span>山东省工业设计协会</span>
-		  <?php endif; ?>
-		  <?php endforeach; endif; else: echo "" ;endif; ?>
-        </div>
+          <strong>承办单位：</strong>
+          <?php if(is_array($webset['xieban']) || $webset['xieban'] instanceof \think\Collection || $webset['xieban'] instanceof \think\Paginator): if( count($webset['xieban'])==0 ) : echo "" ;else: foreach($webset['xieban'] as $key=>$vo): if($key==0): ?>
+          <p><span></span><?php echo htmlentities($vo); ?></p>
+          <?php else: ?>
+          <p><span>&nbsp;</span><?php echo htmlentities($vo); ?></p>
+          <?php endif; ?>
+          <?php endforeach; endif; else: echo "" ;endif; ?>
+
+
+<!--          < div class="">-->
+<!--          <strong>承办单位：</strong>-->
+
+<!--&lt;!&ndash;		   <?php if(is_array($webset['xieban']) || $webset['xieban'] instanceof \think\Collection || $webset['xieban'] instanceof \think\Paginator): if( count($webset['xieban'])==0 ) : echo "" ;else: foreach($webset['xieban'] as $key=>$vo): ?>&ndash;&gt;-->
+<!--&lt;!&ndash;		  <?php if($key==0): ?>&ndash;&gt;-->
+<!--&lt;!&ndash;          <span><?php echo htmlentities($vo); ?></span>&ndash;&gt;-->
+<!--&lt;!&ndash;		  <?php endif; ?>&ndash;&gt;-->
+<!--&lt;!&ndash;		    <?php endforeach; endif; else: echo "" ;endif; ?>&ndash;&gt;-->
+<!--        </div>-->
+
+
+<!--        <div class="right">-->
+<!--		 <?php if(is_array($webset['xieban']) || $webset['xieban'] instanceof \think\Collection || $webset['xieban'] instanceof \think\Paginator): if( count($webset['xieban'])==0 ) : echo "" ;else: foreach($webset['xieban'] as $key=>$vo): ?>-->
+<!--		  <?php if($key>0): ?>-->
+<!--          <span>山东省工业设计协会</span>-->
+<!--		  <?php endif; ?>-->
+<!--		  <?php endforeach; endif; else: echo "" ;endif; ?>-->
+<!--        </div>-->
         <div class="clear"></div>
       </div>
   </div>
@@ -510,16 +526,16 @@ var _hmt = _hmt || [];
     <strong><?php echo htmlentities($webset['zuwei']); ?></strong>
     <div class="height170">
     <p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</span><?php echo htmlentities($webset['contacts']); ?></p>
-	<p><span>&nbsp;</span>王  晨     韩  啸</p>
+	<p>王  晨     焦玉杰</p>
 	<?php if(is_array($webset['tel']) || $webset['tel'] instanceof \think\Collection || $webset['tel'] instanceof \think\Paginator): if( count($webset['tel'])==0 ) : echo "" ;else: foreach($webset['tel'] as $key=>$vo): if($key==0): ?>
-    <p><span>电 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span><?php echo htmlentities($vo); ?></p>  
+    <p><span>电 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span><?php echo htmlentities($vo); ?></p>
 	<?php else: ?>
 	<p><span>&nbsp;</span><?php echo htmlentities($vo); ?></p>
 	<?php endif; ?>
 	<?php endforeach; endif; else: echo "" ;endif; ?>
     
    <!-- <p><span>微&nbsp;&nbsp;信&nbsp;&nbsp;号：</span><?php echo htmlentities($webset['weixin']); ?></p>-->
-    <p><span>邮 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span><?php echo htmlentities($webset['email']); ?></p>
+    <p><span>邮 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span><?php echo htmlentities($webset['email']); ?></p>
 	 <p><span>邮寄地址：</span>烟台市高新区科技大道69号创业大厦</p>
     </div>
    

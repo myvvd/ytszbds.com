@@ -16,23 +16,24 @@
           <strong>主办单位：</strong>
           <span>{$webset.host}</span>
         </div>
-        <div class="right">
-          <strong>支持单位：</strong>
-          <span>{$webset.support}</span>
-        </div>
+<!--        <div class="right">-->
+<!--          <strong>支持单位：</strong>-->
+<!--          <span>{$webset.support}</span>-->
+<!--        </div>-->
         <div class="clear"></div>
       </div>
       <div class="mfoot_m_cont m_two">
         <div class="left">
-          <strong>承办单位：</strong>
-          <div class="mfoot_list">
-		  {foreach name="webset.undertake" item="vo"}
-		  {if $key%2==0}
-          <span style="display:block;">{$vo}</span>
-		  {/if}
-		  {/foreach}
-          
-          </div>
+          <strong>支持单位：</strong>
+<!--          <div class="mfoot_list">-->
+<!--		  {foreach name="webset.undertake" item="vo"}-->
+<!--		  {if $key%2==0}-->
+<!--          <span style="display:block;">{$vo}</span>-->
+<!--		  {/if}-->
+<!--		  {/foreach}-->
+
+<!--          </div>-->
+            <span>{$webset.support}</span>
         </div>
         <div class="right">
 		 {foreach name="webset.undertake" item="vo"}
@@ -45,21 +46,34 @@
         <div class="clear"></div>
       </div>
       <div class="mfoot_m_cont">
-        <div class="left">
-          <strong>协办单位：</strong>
-		   {foreach name="webset.xieban" item="vo"}
-		  {if $key==0}
-          <span>各市工业和信息化局</span>
-		  {/if}
-		    {/foreach}
-        </div>
-        <div class="right">
-		 {foreach name="webset.xieban" item="vo"}
-		  {if $key>0}
-          <span>山东省工业设计协会</span>
-		  {/if}
-		  {/foreach}
-        </div>
+          <strong>承办单位：</strong>
+          {foreach name="webset.xieban" item="vo"}
+          {if $key==0}
+          <p><span></span>{$vo}</p>
+          {else}
+          <p><span>&nbsp;</span>{$vo}</p>
+          {/if}
+          {/foreach}
+
+
+<!--          < div class="">-->
+<!--          <strong>承办单位：</strong>-->
+
+<!--&lt;!&ndash;		   {foreach name="webset.xieban" item="vo"}&ndash;&gt;-->
+<!--&lt;!&ndash;		  {if $key==0}&ndash;&gt;-->
+<!--&lt;!&ndash;          <span>{$vo}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;		  {/if}&ndash;&gt;-->
+<!--&lt;!&ndash;		    {/foreach}&ndash;&gt;-->
+<!--        </div>-->
+
+
+<!--        <div class="right">-->
+<!--		 {foreach name="webset.xieban" item="vo"}-->
+<!--		  {if $key>0}-->
+<!--          <span>山东省工业设计协会</span>-->
+<!--		  {/if}-->
+<!--		  {/foreach}-->
+<!--        </div>-->
         <div class="clear"></div>
       </div>
   </div>
@@ -67,7 +81,7 @@
     <strong>{$webset.zuwei}</strong>
     <div class="height170">
     <p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</span>{$webset.contacts}</p>
-	<p><span>&nbsp;</span>王  晨     焦玉杰</p>
+	<p>王  晨     焦玉杰</p>
 	{foreach name="webset.tel" item="vo"}
 	 {if $key==0}
     <p><span>电 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span>{$vo}</p>

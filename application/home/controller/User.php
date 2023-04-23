@@ -26,6 +26,7 @@ class User extends HomeBase
     $cate = Db::name('category')
       ->order('sort ASC')
       ->field('id,title,create_time,ftitle')
+        ->where('status',1)
       ->select();
             // var_dump($cate);die;
     $this->assign('cate', $cate);
@@ -141,6 +142,7 @@ class User extends HomeBase
      $cate = Db::name('category')
       ->order('sort ASC')
       ->field('id,title,create_time,ftitle')
+         ->where('status','1')
       ->select();
 
     $this->assign('cate', $cate);
